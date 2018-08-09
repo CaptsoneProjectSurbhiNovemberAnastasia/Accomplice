@@ -10,8 +10,8 @@ export const fetchUsers = () => {
   return async dispatch => {
     try {
       const response = await axios.get('http://localhost:8080/')
-      const profiles = response.data
-      const action = getUsers(profiles)
+      const users = response.data
+      const action = getUsers(users)
       dispatch(action)
     } catch (err) {
       console.log(err)

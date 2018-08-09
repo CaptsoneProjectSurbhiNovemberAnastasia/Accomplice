@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { fetchUsers } from './store/action-creators.js'
 import { connect } from 'react-redux';
-// import ProfileCard from './ProfileCard'
+import ProfileCard from './ProfileCard'
 class Home extends Component {
 
   componentDidMount () {
@@ -10,21 +10,18 @@ class Home extends Component {
 
   render () {
     const { users } = this.props
-    console.log('USERS', users)
-    if (users) {
-      console.log('HERE')
-      for (var i = 5; i >= 0; i++) {
-
-      }
+    let topFive = [];
+    for (var i = 5; i >= 1; i--) {
+      topFive.push(users[i])
     }
-
     return (
       <div>
-        {/* {
-          topFive.map(user => {
-          <ProfileCard user={user} key={user.id} />
-        })
-        } */}
+      {
+        !topFive ?
+        console.log('loading') :
+        topFive.forEach(element => console.log('TEST:', element))
+        // topFive.map(user => <h1>{user}</h1>)
+      }
       </div>
     )
   }

@@ -2,12 +2,9 @@ import React from 'react'
 
 
 const ProfileCard = props => {
-	const user = props.user
+	const {user} = props
 	return (
 		<div className="profile">
-			<div className="profile-image">
-				<img src={user.photo} />
-			</div>
 			<div className="profile-info">
 				<p>
 					{user.name}
