@@ -9,7 +9,7 @@ const getUsers = users => {
 export const fetchUsers = () => {
   return async dispatch => {
     try {
-      const response = await axios.get('http://localhost:8080/')
+      const response = await axios.get('http://localhost:8080/api/user')
       const users = response.data
       const action = getUsers(users)
       dispatch(action)
