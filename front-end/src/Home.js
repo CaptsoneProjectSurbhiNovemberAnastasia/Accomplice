@@ -11,17 +11,26 @@ class Home extends Component {
   render () {
     const { users } = this.props
     let topFive = [];
-    for (var i = 5; i >= 1; i--) {
-      topFive.push(users[i])
+
+    if (users.length) {
+      for (var i = 5; i >= 1; i--) {
+        topFive.push(users[i])
+      }
     }
+    console.log(topFive)
+
     return (
       <div>
+        <h2>Top Matches:</h2>
+        <div className="profiles-box">
       {
         !topFive ?
         console.log('loading') :
-        topFive.forEach(element => console.log('TEST:', element))
-        // topFive.map(user => <h1>{user}</h1>)
+        topFive.map(user => {
+          return <ProfileCard user={user} key={user.id}/>
+        })
       }
+        </div>
       </div>
     )
   }
