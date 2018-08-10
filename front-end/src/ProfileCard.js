@@ -7,7 +7,7 @@ const ProfileCard = props => {
 		<div className="profile">
 			<div className="profile-info">
 				<p>
-					{user.name}
+					{user.firstName + ' ' + user.lastName}
 					<br />
 					{user.description}
 				</p>
