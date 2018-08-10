@@ -33,12 +33,14 @@ const init = async () => {
       return ourPopulation
     }
 
-    return runAlgorithm(1).currentPopulation
+    return runAlgorithm(10000)
   } catch (e) {
     console.log(e)
   }
 }
+
 init()
-  .then(pop => console.log(pop))
+  .then(pop => console.log(pop.getAverageFitness()))
   .catch(e => console.log(e))
+  .finally(() => process.exit())
 module.exports = init
