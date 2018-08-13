@@ -17,7 +17,7 @@ class SingleUser extends Component {
     const { user } = this.props
     return (
       <div
-        id="petCard"
+        id="userCard"
         className={this.state.expand ? 'expanded' : 'collapsed'}
         onClick={this.onClick.bind(this)}
       >
@@ -25,35 +25,35 @@ class SingleUser extends Component {
           <div id="picContainer">
             <img
               src={
-                pet.media.photos
-                  ? pet.media.photos.photo[3].$t
+                user.media.photos
+                  ? user.media.photos.photo[3].$t
                   : 'http://biorem.org/wp-content/uploads/2016/07/not-available.png'
               }
-              className="petPic rounded"
-              alt="pet profile pic"
+              className="userPic rounded"
+              alt="user profile pic"
             />
           </div>
         </div>
         <div>
-          <h1>{pet.name.$t}</h1>
-          <h2>{`${pet.age.$t}, ${
-            pet.size.$t === 'L'
+          <h1>{user.name.$t}</h1>
+          <h2>{`${user.age.$t}, ${
+            user.size.$t === 'L'
               ? 'Large'
-              : pet.size.$t === 'M'
+              : user.size.$t === 'M'
                 ? 'Medium'
                 : 'Small'
-          }-sized ${pet.sex.$t === 'M' ? ' Male' : ' Female'}`}</h2>
+          }-sized ${user.sex.$t === 'M' ? ' Male' : ' Female'}`}</h2>
           <h3>
-            {Array.isArray(pet.breeds.breed)
-              ? pet.breeds.breed.map(el => el.$t).join(', ')
-              : pet.breeds.breed.$t}
+            {Array.isArray(user.breeds.breed)
+              ? user.breeds.breed.map(el => el.$t).join(', ')
+              : user.breeds.breed.$t}
           </h3>
         </div>
         <div>
           <p>
-            {pet.description.$t && pet.description.$t.length > 500
-              ? `${pet.description.$t.slice(0, 500)}...`
-              : pet.description.$t}
+            {user.description.$t && user.description.$t.length > 500
+              ? `${user.description.$t.slice(0, 500)}...`
+              : user.description.$t}
           </p>
         </div>
       </div>
