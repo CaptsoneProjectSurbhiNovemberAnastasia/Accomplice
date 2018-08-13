@@ -127,12 +127,11 @@ const AuthForm = props => {
  *   can stay DRY with interfaces that are very similar to each other!
  */
 const mapState = state => ({
-  error: state.currentUser.error
+  error: state.currentUser.error,
 })
 
 const mapDispatch = (dispatch, ownProps) => ({
   handleSubmit(evt, type) {
-    console.log('Inside mapdispatch auth form')
     evt.preventDefault()
     const email = evt.target.email.value
     const password = evt.target.password.value
@@ -144,7 +143,7 @@ const mapDispatch = (dispatch, ownProps) => ({
       ownProps.history.push(redirect)
       //dispatch(fetchUsers(res))
     })
-  }
+  },
 })
 
 export default withRouter(

@@ -11,10 +11,10 @@ const defaultUser = {}
 const getUser = user => ({
   type: GET_USER,
   //Anastasia Added
-  currentUser : user
+  currentUser: user,
 })
 const logOutUser = () => ({
-  type: LOGOUT_USER
+  type: LOGOUT_USER,
 })
 
 // THUNK CREATORS
@@ -39,9 +39,9 @@ export const me = () => dispatch =>
 
 export const auth = (email, password, method) => dispatch =>
   axios
-    .post(`http://localhost:8080/api/user/${method}`, {
+    .post(`http://localhost:8080/auth/${method}`, {
       email,
-      password
+      password,
     })
     .then(res => {
       dispatch(getUser(res.data))
@@ -52,7 +52,7 @@ export const auth = (email, password, method) => dispatch =>
     .catch(error =>
       dispatch(
         getUser({
-          error
+          error,
         })
       )
     )
