@@ -10,13 +10,27 @@ const defaultUser = {}
 // ACTION CREATORS
 const getUser = user => ({
   type: GET_USER,
-  user
+  //Anastasia Added
+  currentUser : user
 })
 const logOutUser = () => ({
   type: LOGOUT_USER
 })
 
 // THUNK CREATORS
+export const fetchUser = id => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/user/${id}`)
+      const currentUser = response.data
+      const action = getUser(currentUser)
+      dispatch(action)
+    } catch (err) {
+      console.log('User not found...', err)
+    }
+  }
+}
+
 export const me = () => dispatch =>
   axios
     .get('/auth/me')
@@ -72,7 +86,7 @@ export const deleteAccount = userId => dispatch => {
 export default function currentUser(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-      return action.user
+      return action.currentUser
     case LOGOUT_USER:
       return defaultUser
     default:

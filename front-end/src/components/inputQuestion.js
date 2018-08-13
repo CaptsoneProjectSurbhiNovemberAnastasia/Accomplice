@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import { fetchUsers } from '../store/action-creators.js'
+// import { fetchUsers } from '../store/action-creators.js'
 
 // import userIcon from './user-regular.svg'
 // import chatIcon from './comment-regular.svg'
@@ -50,22 +50,22 @@ const mapState = state => ({
 })
 
 const mapDispatch = (dispatch, ownProps) => ({
-  fetchUsers: () => {
-    const thunk = fetchUsers()
-    dispatch(thunk)
-  },
+  // fetchUsers: () => {
+  //   const thunk = fetchUsers()
+  //   dispatch(thunk)
+  // },
   async handleSubmit(evt, type) {
-    console.log('Inside mapdispatch auth form')
-    evt.preventDefault()
-    // const email = evt.target.email.value
-    // const password = evt.target.password.value
-    //const redirect = type === 'login' ? '/user' : '/createProfile'
-    console.log('ownProps', ownProps)
-    const thunk = await fetchUsers()
-    console.log('after thunk call')
-    await dispatch(thunk)
-    ownProps.history.push('/allUsers')
-    console.log('after ownProps', ownProps)
+    // console.log('Inside mapdispatch auth form')
+    // evt.preventDefault()
+    // // const email = evt.target.email.value
+    // // const password = evt.target.password.value
+    // //const redirect = type === 'login' ? '/user' : '/createProfile'
+    // console.log('ownProps', ownProps)
+    // const thunk = await fetchUsers()
+    // console.log('after thunk call')
+    // await dispatch(thunk)
+    // ownProps.history.push(`/:id/suggestedMatches`)
+    // console.log('after ownProps', ownProps)
     // Promise.resolve(dispatch(auth(email, password, type))).then(res => {
     //   ownProps.history.push(redirect)
     //   //dispatch(fetchUsers(res))

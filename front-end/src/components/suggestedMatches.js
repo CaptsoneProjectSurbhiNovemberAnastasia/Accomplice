@@ -2,9 +2,9 @@ import React, { Component } from 'react'
 import Cards, { Card } from 'react-swipe-card'
 import { connect } from 'react-redux'
 import {
-  // fetchMatches,
+  fetchSuggestedMatches,
+  fetchUser
   // addMatches,
-  fetchUsers
   // rejectUser
 } from '../store'
 // import SingleUser from './singleUser'
@@ -20,10 +20,11 @@ const CustomAlertRight = () => (
   </span>
 )
 
-class AllUsers extends Component {
-  // componentDidMount() {
-  //   this.props.onLoad(this.props.currentUser)
-  // }
+class SuggestedMatches extends Component {
+  componentDidMount() {
+    this.props.loadMatches()
+    this.props.fetchUser()
+  }
 
   // componentWillUnmount() {
   //   const species = this.props.match.params.type
@@ -31,9 +32,8 @@ class AllUsers extends Component {
   // }
 
   render() {
-    const { users, currentUser, onReject, onLove, onLoad, match } = this.props
-
-    //const data = ['Alexandre', 'Thomas', 'Lucien']
+    const { suggestedMatches, currentUser, onReject, onLove, onLoad, match } = this.props
+    console.log('PROPS:', this.props)
     return (
       <div className="container">
         <div id="card-stack" />
@@ -43,7 +43,8 @@ class AllUsers extends Component {
           onEnd={() => onLoad(currentUser)}
           className="master-root"
         >
-          {users.map(user => (
+          { !suggestedMatches ? null :
+            suggestedMatches.map(user => (
             <Card
               key="{user.id}"
               onSwipeLeft={() => {
@@ -71,23 +72,23 @@ class AllUsers extends Component {
 }
 
 const mapState = state => ({
-  users: state.users,
+  suggestedMatches: state.suggestedMatches,
   currentUser: state.currentUser
 })
 
 const mapDispatch = (dispatch, ownProps) => ({
-  async onLoad(user) {
-    for (let i = 0; i < 25; i++) {
-      await dispatch(fetchUsers(ownProps.match.params.type, user))
-    }
+  async fetchUser() {
+    await dispatch(fetchUser(ownProps.match.params.id))
   },
-  loadMatches(id) {
-    // dispatch(fetchMatches(id))
+  loadMatches: async () => {
+    const userId = ownProps.match.params.id
+    console.log('OWN PROPS:', ownProps.match.params.id)
+    await dispatch(fetchSuggestedMatches(userId))
   },
-  onReject(userId, currentUserId) {
+  onReject: (userId, currentUserId) => {
     // dispatch(rejectUser(userId, currentUserId))
   },
-  onLove(userId, currentUserId) {
+  onLove: (userId, currentUserId) => {
     // dispatch(addMatches(userId, currentUserId))
   }
 })
@@ -95,4 +96,4 @@ const mapDispatch = (dispatch, ownProps) => ({
 export default connect(
   mapState,
   mapDispatch
-)(AllUsers)
+)(SuggestedMatches)
