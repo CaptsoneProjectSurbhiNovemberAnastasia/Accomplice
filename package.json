@@ -20,6 +20,10 @@
     "connect-session-sequelize": "^5.2.2",
     "express-session": "^1.15.6",
     "morgan": "^1.9.0",
-    "sequelize": "^4.38.0"
+    "react": "^16.4.2",
+    "react-swipe": "^5.1.1",
+    "react-swipe-card": "^0.1.4",
+    "sequelize": "^4.38.0",
+    "swipe-js-iso": "^2.0.4"
   }
 }
