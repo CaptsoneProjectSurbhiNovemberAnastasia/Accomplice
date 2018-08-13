@@ -4,7 +4,7 @@ import {
   // Redirect,
   withRouter,
   Route,
-  Switch
+  Switch,
   // Switch,
   // BrowserRouter as Router
 } from 'react-router-dom'
@@ -13,6 +13,7 @@ import User from './components/user'
 import MatchedUsers from './components/matchedUsers'
 import AuthForm from './components/auth-form'
 import SuggestedMatches from './components/suggestedMatches'
+import InputQuestion from './components/inputQuestion'
 //import Home from './Home'
 // import {
 //   Login,
@@ -37,11 +38,15 @@ class Routes extends Component {
       <div>
         <Switch>
           {/* <Route path="/createProfile" component={CreateProfile} /> */}
-          <Route path="/user/:id/suggestedMatches" component={SuggestedMatches} />
+          <Route
+            path="/user/:id/suggestedMatches"
+            component={SuggestedMatches}
+          />
           <Route path="/navbar" component={Navbar} />
           <Route exact path="/" component={AuthForm} />
           <Route exact path="/user" component={User} />
           <Route path="/matchedUsers" component={MatchedUsers} />
+          <Route path="/question" component={InputQuestion} />
         </Switch>
       </div>
     )

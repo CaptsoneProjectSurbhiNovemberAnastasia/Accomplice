@@ -135,14 +135,7 @@ const mapDispatch = (dispatch, ownProps) => ({
     evt.preventDefault()
     const email = evt.target.email.value
     const password = evt.target.password.value
-    const redirect = type === 'login' ? '/user' : '/createProfile'
-    console.log('ownProps', ownProps)
-    //ownProps.history.push('/user')
-    console.log('after ownProps', ownProps)
-    Promise.resolve(dispatch(auth(email, password, type))).then(res => {
-      ownProps.history.push(redirect)
-      //dispatch(fetchUsers(res))
-    })
+    dispatch(auth(email, password, type))
   },
 })
 

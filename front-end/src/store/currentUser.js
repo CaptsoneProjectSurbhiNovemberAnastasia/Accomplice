@@ -1,4 +1,5 @@
 import axios from 'axios'
+import history from '../history'
 
 // ACTION TYPES
 const GET_USER = 'GET_USER'
@@ -37,25 +38,25 @@ export const me = () => dispatch =>
     .then(res => dispatch(getUser(res.data || defaultUser)))
     .catch(err => console.log(err))
 
-export const auth = (email, password, method) => dispatch =>
-  axios
-    .post(`http://localhost:8080/auth/${method}`, {
+export const auth = (email, password, method) => async dispatch => {
+  let res
+  try {
+    res = await axios.post(`http://localhost:8080/auth/${method}`, {
       email,
       password,
+      method,
     })
-    .then(res => {
-      dispatch(getUser(res.data))
-      if (res.data) {
-        return res.data.id
-      }
-    })
-    .catch(error =>
-      dispatch(
-        getUser({
-          error,
-        })
-      )
-    )
+  } catch (e) {
+    return dispatch(getUser({ error: e }))
+  }
+
+  try {
+    dispatch(getUser(res.data))
+    history.push('/question')
+  } catch (e) {
+    console.error(e)
+  }
+}
 
 export const logout = () => dispatch => {
   axios
