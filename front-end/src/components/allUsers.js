@@ -34,6 +34,9 @@ class AllUsers extends Component {
     const { users, currentUser, onReject, onLove, onLoad, match } = this.props
 
     //const data = ['Alexandre', 'Thomas', 'Lucien']
+    if (users[0]) {
+      console.log('imageUrl', users[0].imageUrl)
+    }
     return (
       <div className="container">
         <div id="card-stack" />
@@ -56,6 +59,7 @@ class AllUsers extends Component {
               <h2>
                 {user.firstName} {user.lastName}
               </h2>
+              <img src={user.imageUrl} />
             </Card>
           ))}
         </Cards>
