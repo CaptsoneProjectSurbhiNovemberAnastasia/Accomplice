@@ -5,16 +5,17 @@ export const GET_SUGGESTED_MATCHES = 'GET_SUGGESTED_MATCHES'
 
 //ACTION CREATORS
 const getSuggestedMatches = suggestedMatches => {
-  return { type: GET_SUGGESTED_MATCHES, suggestedMatches}
+  return { type: GET_SUGGESTED_MATCHES, suggestedMatches }
 }
 
 //THUNK CREATORS
-export const fetchSuggestedMatches = (id) => {
+export const fetchSuggestedMatches = id => {
   return async dispatch => {
     try {
-      const response = await axios.get(`http://localhost:8080/api/user/${id}/suggestedMatches`)
+      const response = await axios.get(
+        `http://localhost:8080/api/user/${id}/suggestedMatches`
+      )
       const suggestedMatches = response.data
-      console.log('SUGGESTED MATCHES:', suggestedMatches)
       const action = getSuggestedMatches(suggestedMatches)
       dispatch(action)
     } catch (err) {

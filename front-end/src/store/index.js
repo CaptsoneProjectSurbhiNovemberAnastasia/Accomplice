@@ -3,7 +3,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-import matches from './matches'
+import suggestedMatches from './matches'
 import currentUser from './currentUser'
 import currentLocation from './currentLocation'
 import form from './form'
@@ -12,8 +12,8 @@ import { createLogger } from 'redux-logger'
 const reducer = combineReducers({
   currentUser,
   currentLocation,
-  matches,
-  form
+  suggestedMatches,
+  form,
 })
 
 // Use for production
@@ -21,7 +21,7 @@ const middleware = composeWithDevTools(
   applyMiddleware(
     thunkMiddleware,
     createLogger({
-      collapsed: true
+      collapsed: true,
     })
   )
 )
