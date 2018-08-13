@@ -1,16 +1,17 @@
 import React, { Component } from 'react'
 import { fetchUsers } from './store/action-creators.js'
-import { connect } from 'react-redux';
+import { connect } from 'react-redux'
 import ProfileCard from './ProfileCard'
-class Home extends Component {
+import Cards, { Card } from 'react-swipe-card'
 
-  componentDidMount () {
+class Home extends Component {
+  componentDidMount() {
     this.props.fetchUsers()
   }
 
-  render () {
+  render() {
     const { users } = this.props
-    let topFive = [];
+    let topFive = []
 
     if (users.length) {
       for (var i = 5; i >= 1; i--) {
@@ -18,19 +19,30 @@ class Home extends Component {
       }
     }
     console.log(topFive)
+    const data = ['Alexandre', 'Thomas', 'Lucien']
 
     return (
       <div>
         <h2>Top Matches:</h2>
-        <div className="profiles-box">
-      {
-        !topFive ?
-        console.log('loading') :
-        topFive.map(user => {
-          return <ProfileCard user={user} key={user.id}/>
-        })
-      }
-        </div>
+        <Cards onEnd={action('end')} className="master-root">
+          {data.map(item => (
+            <Card
+              onSwipeLeft={action('swipe left')}
+              onSwipeRight={action('swipe right')}
+            >
+              <h2>{item}</h2>
+            </Card>
+          ))}
+        </Cards>
+        {/* className="profiles-box"
+        <div>
+          {!topFive
+              ? console.log('loading')
+              : topFive.map(user => {
+                  return <ProfileCard user={user} key={user.id} />
+                })}
+          <h1>November</h1>
+        </div> */}
       </div>
     )
   }
@@ -51,4 +63,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Home)

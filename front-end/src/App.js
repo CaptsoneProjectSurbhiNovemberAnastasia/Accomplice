@@ -1,10 +1,9 @@
-import React, { Component } from 'react';
-import Navbar from './Navbar'
+import React, { Component } from 'react'
+// import Navbar from './components/Navbar'
 import Routes from './Routes'
-import './App.css';
+import './App.css'
 
 class App extends Component {
-
   // componentDidMount() {
   //   fetch('http://localhost:8080/')
   //   .then(res => res.json())
@@ -12,13 +11,14 @@ class App extends Component {
   // }
 
   render() {
+    console.log('Inside App ******')
     return (
       <div className="App">
-        <Navbar />
+        {/* <Navbar /> */}
         <Routes />
       </div>
-    );
+    )
   }
 }
 
-export default App;
+export default App
