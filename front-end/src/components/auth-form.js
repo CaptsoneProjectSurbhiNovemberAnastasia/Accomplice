@@ -127,7 +127,7 @@ const AuthForm = props => {
  *   can stay DRY with interfaces that are very similar to each other!
  */
 const mapState = state => ({
-  error: state.currentUser.error,
+  error: state.user.error,
 })
 
 const mapDispatch = (dispatch, ownProps) => ({

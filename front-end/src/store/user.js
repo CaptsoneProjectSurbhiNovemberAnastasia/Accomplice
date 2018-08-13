@@ -11,8 +11,7 @@ const defaultUser = {}
 // ACTION CREATORS
 const getUser = user => ({
   type: GET_USER,
-  //Anastasia Added
-  currentUser: user,
+  user,
 })
 const logOutUser = () => ({
   type: LOGOUT_USER,
@@ -87,7 +86,7 @@ export const deleteAccount = userId => dispatch => {
 export default function currentUser(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-      return action.currentUser
+      return action.user
     case LOGOUT_USER:
       return defaultUser
     default:

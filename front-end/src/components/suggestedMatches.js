@@ -26,7 +26,6 @@ const mapState = state => {
   console.log(state)
   return {
     suggestedMatches: state.suggestedMatches,
-    currentUser: state.currentUser,
   }
 }
 
