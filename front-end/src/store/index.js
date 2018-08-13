@@ -4,13 +4,13 @@ import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
 import suggestedMatches from './matches'
-import currentUser from './currentUser'
+import user from './user'
 import currentLocation from './currentLocation'
 import form from './form'
 import { createLogger } from 'redux-logger'
 
 const reducer = combineReducers({
-  currentUser,
+  user,
   currentLocation,
   suggestedMatches,
   form,
@@ -44,7 +44,7 @@ const store = createStore(rootReducer, persistedState, middleware)
 //   localStorage.setItem('store', JSON.stringify(store.getState()))
 // )
 
-export * from './currentUser'
+export * from './user'
 export * from './matches'
 export * from './currentLocation'
 export * from './form'

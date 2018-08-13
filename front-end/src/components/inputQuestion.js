@@ -37,8 +37,8 @@ class InputQuestion extends Component {
 }
 
 const mapState = state => ({
-  error: state.currentUser.error,
-  users: state.users,
+  error: state.user.error,
+  user: state.user,
 })
 
 const mapDispatch = (dispatch, ownProps) => ({

@@ -30,7 +30,7 @@ class MatchedUsers extends Component {
                       className="unmatch smallIcon"
                       onClick={event => {
                         event.preventDefault()
-                        this.props.onUnmatch(user, this.props.currentUser.id)
+                        this.props.onUnmatch(user, this.props.user.id)
                       }}
                     >
                       <FontAwesome name="heart" />
@@ -40,7 +40,7 @@ class MatchedUsers extends Component {
                       className="emailEnvelope smallIcon"
                       onClick={event => {
                         event.preventDefault()
-                        this.props.onClick(this.props.currentUser, user)
+                        this.props.onClick(this.props.user, user)
                       }}
                     >
                       <FontAwesome name="envelope-o" />
@@ -71,9 +71,9 @@ class MatchedUsers extends Component {
 }
 
 const mapState = state => ({
-  currentUser: state.currentUser,
+  user: state.user,
   matches: state.users,
-  matchedUsers: state.matchedUsers
+  matchedUsers: state.matchedUsers,
 })
 
 const mapDispatch = dispatch => ({

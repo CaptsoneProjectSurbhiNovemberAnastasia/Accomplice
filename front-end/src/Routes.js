@@ -32,29 +32,36 @@ import InputQuestion from './components/inputQuestion'
 
 class Routes extends Component {
   render() {
-    // const { isLoggedIn } = this.props
-    console.log('Inside Routes **********')
+    const { isLoggedIn } = this.props
+    console.log(isLoggedIn)
     return (
       <div>
         <Switch>
           {/* <Route path="/createProfile" component={CreateProfile} /> */}
-          <Route
-            path="/user/:id/suggestedMatches"
-            component={SuggestedMatches}
-          />
-          <Route path="/navbar" component={Navbar} />
           <Route exact path="/" component={AuthForm} />
-          <Route exact path="/user" component={User} />
-          <Route path="/matchedUsers" component={MatchedUsers} />
-          <Route path="/question" component={InputQuestion} />
+          {isLoggedIn && (
+            <Switch>
+              <Route
+                path="/user/:id/suggestedMatches"
+                component={SuggestedMatches}
+              />
+              <Route path="/navbar" component={Navbar} />
+
+              <Route exact path="/user" component={User} />
+              <Route path="/matchedUsers" component={MatchedUsers} />
+              <Route path="/question" component={InputQuestion} />
+            </Switch>
+          )}
         </Switch>
       </div>
     )
   }
 }
+
+const mapState = state => ({ isLoggedIn: !!state.user.id })
 export default withRouter(
   connect(
-    null,
+    mapState,
     null
   )(Routes)
 )
