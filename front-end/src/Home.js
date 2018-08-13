@@ -18,8 +18,8 @@ class Home extends Component {
         topFive.push(users[i])
       }
     }
-    console.log(topFive)
-    const data = ['Alexandre', 'Thomas', 'Lucien']
+//     console.log(topFive)
+//     const data = ['Alexandre', 'Thomas', 'Lucien']
 
     return (
       <div>
