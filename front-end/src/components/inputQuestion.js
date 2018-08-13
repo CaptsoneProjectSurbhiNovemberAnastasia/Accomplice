@@ -41,21 +41,9 @@ const mapState = state => ({
   user: state.user,
 })
 
-const mapDispatch = (dispatch, ownProps) => ({
-  async handleSubmit(evt, type) {
-    // evt.preventDefault()
-    // const email = evt.target.email.value
-    // const password = evt.target.password.value
-    // const redirect = type === 'login' ? '/user' : '/createProfile'
-    // const thunk = await fetchUsers()
-    // await dispatch(thunk)
-    //ownProps.history.push(`/:id/suggestedMatches`)
-  },
-})
-
 export default withRouter(
   connect(
     mapState,
-    mapDispatch
+    null
   )(InputQuestion)
 )

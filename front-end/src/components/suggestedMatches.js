@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchSuggestedMatches } from '../store'
+import UserCard from './UserCard'
 
 class SuggestedMatches extends Component {
   componentDidMount() {
@@ -15,7 +16,7 @@ class SuggestedMatches extends Component {
         {!suggestedMatches
           ? null
           : suggestedMatches.map(user => (
-              <li key={user.id}>{user.firstName}</li>
+              <UserCard key={user.id} user={user} />
             ))}
       </ul>
     )

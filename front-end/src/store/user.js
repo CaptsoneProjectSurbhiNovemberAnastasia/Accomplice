@@ -18,18 +18,18 @@ const logOutUser = () => ({
 })
 
 // THUNK CREATORS
-export const fetchUser = id => {
-  return async dispatch => {
-    try {
-      const response = await axios.get(`http://localhost:8080/api/user/${id}`)
-      const currentUser = response.data
-      const action = getUser(currentUser)
-      dispatch(action)
-    } catch (err) {
-      console.log('User not found...', err)
-    }
-  }
-}
+// export const fetchUser = id => {
+//   return async dispatch => {
+//     try {
+//       const response = await axios.get(`http://localhost:8080/api/user/${id}`)
+//       const currentUser = response.data
+//       const action = getUser(currentUser)
+//       dispatch(action)
+//     } catch (err) {
+//       console.log('User not found...', err)
+//     }
+//   }
+// }
 
 export const me = () => dispatch =>
   axios
@@ -38,6 +38,7 @@ export const me = () => dispatch =>
     .catch(err => console.log(err))
 
 export const auth = (email, password, method) => async dispatch => {
+  console.log('hit auth in store')
   let res
   try {
     res = await axios.post(`http://localhost:8080/auth/${method}`, {
