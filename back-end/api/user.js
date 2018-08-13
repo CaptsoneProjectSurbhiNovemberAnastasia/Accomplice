@@ -1,14 +1,41 @@
 const router = require('express').Router()
-const { User } = require('../db/models')
+const { SuggestedMatchesPerUser, User } = require('../db/models')
+
 module.exports = router
 
-//get a single user (to set them as current user on state)
+
+router.get('/:id/suggestedmatches', async (req, res, next) => {
+  try {
+    const ourUserId = Number(req.params.id)
+
+    const match = await SuggestedMatchesPerUser.findOne({ where: { userId: ourUserId } })
+
+    const matchId = match.suggestedMatchId
+
+    const possibleUserMatchIds = await SuggestedMatchesPerUser.findAll({
+      where: { suggestedMatchId: matchId}
+    })
+
+    let possibleMatches = [];
+    for (var i = 0; i < possibleUserMatchIds.length; i++) {
+      if (possibleUserMatchIds[i].userId === ourUserId) {
+        possibleUserMatchIds.splice(i, 1)
+      }
+      possibleMatches.push(await User.findOne({where: { id: possibleUserMatchIds[i].userId}}))
+    }
+
+    res.json(possibleMatches).status(200)
+  } catch (e) {
+    next(e)
+  }
+})
+
+// get all users
 router.get('/', (req, res, next) => {
   User.findAll()
-    .then(user => res.json(user))
-    .catch(next)
+    .then(users => res.json(users))
+    .catch(e => next(e))
 })
-console.log('inside user api')
 
 router.post('/login', (req, res, next) => {
   User.findOne({ where: { email: req.body.email } })
@@ -52,13 +79,3 @@ router.post('/signup', (req, res, next) => {
 //     .catch(next);
 // });
 
-// //delete a user
-// router.delete('/:userId', (req, res, next) => {
-//   User.destroy({
-//     where: {
-//       id: req.params.userId
-//     }
-//   })
-//     .then(() => res.sendStatus(204))
-//     .catch(next);
-// });
