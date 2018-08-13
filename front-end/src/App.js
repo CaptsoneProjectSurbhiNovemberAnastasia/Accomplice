@@ -11,10 +11,8 @@ class App extends Component {
   // }
 
   render() {
-    console.log('Inside App ******')
     return (
       <div className="App">
-        {/* <Navbar /> */}
         <Routes />
       </div>
     )

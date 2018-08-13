@@ -3,30 +3,25 @@ import { createStore, combineReducers, applyMiddleware } from 'redux'
 import thunkMiddleware from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
 
-import users from './action-creators'
+import suggestedMatches from './matches'
 import currentUser from './currentUser'
 import currentLocation from './currentLocation'
 import form from './form'
 import { createLogger } from 'redux-logger'
 
-// Use for development
-// const middleware = composeWithDevTools(
-// 	applyMiddleware(thunkMiddleware, createLogger({ collapsed: true }))
-// )
 const reducer = combineReducers({
   currentUser,
   currentLocation,
-
-  users,
-
-  form
+  suggestedMatches,
+  form,
 })
+
 // Use for production
 const middleware = composeWithDevTools(
   applyMiddleware(
     thunkMiddleware,
     createLogger({
-      collapsed: true
+      collapsed: true,
     })
   )
 )
@@ -38,18 +33,19 @@ const persistedState = localStorage.getItem('store')
 const rootReducer = (state, action) => {
   if (action.type === 'LOGOUT_USER') {
     state = undefined
+    //or possibly update to {}?
   }
   return reducer(state, action)
 }
 
 const store = createStore(rootReducer, persistedState, middleware)
 
-store.subscribe(() =>
-  localStorage.setItem('store', JSON.stringify(store.getState()))
-)
+// store.subscribe(() =>
+//   localStorage.setItem('store', JSON.stringify(store.getState()))
+// )
 
 export * from './currentUser'
-export * from './action-creators'
+export * from './matches'
 export * from './currentLocation'
 export * from './form'
 

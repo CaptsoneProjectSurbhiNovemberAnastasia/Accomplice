@@ -1,4 +1,5 @@
 import axios from 'axios'
+import history from '../history'
 
 // ACTION TYPES
 const GET_USER = 'GET_USER'
@@ -10,38 +11,52 @@ const defaultUser = {}
 // ACTION CREATORS
 const getUser = user => ({
   type: GET_USER,
-  user
+  //Anastasia Added
+  currentUser: user,
 })
 const logOutUser = () => ({
-  type: LOGOUT_USER
+  type: LOGOUT_USER,
 })
 
 // THUNK CREATORS
+export const fetchUser = id => {
+  return async dispatch => {
+    try {
+      const response = await axios.get(`http://localhost:8080/api/user/${id}`)
+      const currentUser = response.data
+      const action = getUser(currentUser)
+      dispatch(action)
+    } catch (err) {
+      console.log('User not found...', err)
+    }
+  }
+}
+
 export const me = () => dispatch =>
   axios
     .get('/auth/me')
     .then(res => dispatch(getUser(res.data || defaultUser)))
     .catch(err => console.log(err))
 
-export const auth = (email, password, method) => dispatch =>
-  axios
-    .post(`http://localhost:8080/api/user/${method}`, {
+export const auth = (email, password, method) => async dispatch => {
+  let res
+  try {
+    res = await axios.post(`http://localhost:8080/auth/${method}`, {
       email,
-      password
+      password,
+      method,
     })
-    .then(res => {
-      dispatch(getUser(res.data))
-      if (res.data) {
-        return res.data.id
-      }
-    })
-    .catch(error =>
-      dispatch(
-        getUser({
-          error
-        })
-      )
-    )
+  } catch (e) {
+    return dispatch(getUser({ error: e }))
+  }
+
+  try {
+    dispatch(getUser(res.data))
+    history.push('/question')
+  } catch (e) {
+    console.error(e)
+  }
+}
 
 export const logout = () => dispatch => {
   axios
@@ -72,7 +87,7 @@ export const deleteAccount = userId => dispatch => {
 export default function currentUser(state = defaultUser, action) {
   switch (action.type) {
     case GET_USER:
-      return action.user
+      return action.currentUser
     case LOGOUT_USER:
       return defaultUser
     default:
