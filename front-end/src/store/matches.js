@@ -13,11 +13,19 @@ export const fetchSuggestedMatches = id => {
   return async dispatch => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/user/${id}/suggestedMatches`
+        `http://localhost:8080/api/user/${id}/suggestedmatches`
       )
+
       const suggestedMatches = response.data
-      const action = getSuggestedMatches(suggestedMatches)
-      dispatch(action)
+      console.log(suggestedMatches)
+      if (suggestedMatches === 'FORBIDDEN') {
+        dispatch(getSuggestedMatches(false))
+      } else if (suggestedMatches === 'No matches found') {
+        dispatch(getSuggestedMatches([]))
+      } else {
+        const action = getSuggestedMatches(suggestedMatches)
+        dispatch(action)
+      }
     } catch (err) {
       console.log(err)
     }

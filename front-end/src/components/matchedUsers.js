@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-// import { Link } from 'react-router-dom'
 import FontAwesome from 'react-fontawesome'
-// import { sendEmail, unMatch } from '../store'
 import { connect } from 'react-redux'
-// import { EmailPreview } from './'
 
 class MatchedUsers extends Component {
   render() {
@@ -16,16 +13,6 @@ class MatchedUsers extends Component {
               return (
                 user.id && (
                   <div key={user.id} className="matches userCard">
-                    {/* <Link to={`matches/${user.id}`}>
-                      <img
-                        src={
-                          user.media.photos
-                            ? user.media.photos.photo[3]
-                            : 'http://biorem.org/wp-content/uploads/2016/07/not-available.png'
-                        }
-                        className="userPic rounded"
-                        alt="user profile pic"
-                      /> */}
                     <button
                       className="unmatch smallIcon"
                       onClick={event => {
@@ -50,13 +37,6 @@ class MatchedUsers extends Component {
                         {user.firstName} {user.lastName}
                       </a>
                     </div>
-                    {/* </Link> */}
-                    {/* <EmailPreview
-                      user={this.props.currentUser}
-                      user={user}
-                      name="matches"
-                      contacted={contacted}
-                    /> */}
                   </div>
                 )
               )
@@ -76,21 +56,7 @@ const mapState = state => ({
   matchedUsers: state.matchedUsers,
 })
 
-const mapDispatch = dispatch => ({
-  // onUnmatch(user, userId) {
-  //   if (
-  //     window.confirm(
-  //       `Are you sure you want to delete your match with ${user.name}?`
-  //     )
-  //   )
-  //     dispatch(unMatch(user.id, userId))
-  // },
-  // onClick(user, user) {
-  //   sendEmail(user, user)
-  // }
-})
-
 export default connect(
   mapState,
-  mapDispatch
+  null
 )(MatchedUsers)

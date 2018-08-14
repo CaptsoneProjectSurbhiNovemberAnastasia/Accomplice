@@ -1,9 +1,6 @@
-export { Login, Signup } from './auth-form'
+export { Authform } from './auth-form'
 export { Navbar } from './navbar'
 export { User } from './user'
 export { AllUsers } from './allUsers'
-// export { default as MatchedUsers } from './matchedUsers'
-// export { CreateProfile, UpdateProfile } from './forms/profileForm'
-// export { default as SingleUser } from './singleUser'
-// export { default as EmailPreview } from './emailPreview'
+
 export { default as CurrentLocation } from './currentLocation'

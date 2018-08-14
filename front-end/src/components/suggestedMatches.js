@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchSuggestedMatches } from '../store'
+import UserCard from './UserCard'
 
 class SuggestedMatches extends Component {
   componentDidMount() {
@@ -10,15 +11,24 @@ class SuggestedMatches extends Component {
   render() {
     const { suggestedMatches } = this.props
     console.log('PROPS:', this.props)
-    return (
-      <ul>
-        {!suggestedMatches
-          ? null
-          : suggestedMatches.map(user => (
-              <li key={user.id}>{user.firstName}</li>
-            ))}
-      </ul>
-    )
+    if (!Array.isArray(suggestedMatches) && !suggestedMatches) {
+      return <div>You're not allowed to view this page.</div>
+    } else if (
+      Array.isArray(suggestedMatches) &&
+      suggestedMatches.length === 0
+    ) {
+      return <div>No matches found.</div>
+    } else {
+      return (
+        <ul>
+          {!suggestedMatches
+            ? null
+            : suggestedMatches.map(user => (
+                <UserCard key={user.id} user={user} />
+              ))}
+        </ul>
+      )
+    }
   }
 }
 
