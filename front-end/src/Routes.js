@@ -8,6 +8,7 @@ import SuggestedMatches from './components/suggestedMatches'
 import InputQuestion from './components/inputQuestion'
 import { me } from './store'
 import AllMatches from './components/AllMatches'
+import UserProfile from './components/UserProfile'
 
 class Routes extends Component {
   componentDidMount() {
@@ -15,7 +16,6 @@ class Routes extends Component {
   }
   render() {
     const { isLoggedIn } = this.props
-    console.log('am i logged in?', isLoggedIn)
     return (
       <div>
         <Switch>
@@ -33,6 +33,7 @@ class Routes extends Component {
               <Route path="/matchedUsers" component={MatchedUsers} />
               <Route path="/question" component={InputQuestion} />
               <Route exact path="/matches" component={AllMatches} />
+              <Route exact path="/profile" component={UserProfile} />
             </Switch>
           )}
           <Route exact path="/" component={AuthForm} />
