@@ -9,6 +9,7 @@ import logo from '../styles/logo.png'
  */
 const AuthForm = props => {
   const { handleSubmit } = props
+  const { error } = props
   let type
   return (
     <div className="splash">
@@ -47,6 +48,7 @@ const AuthForm = props => {
                 <input name="password" type="password" />
               </div>
               <div className="group">
+                {error ? 'Please enter valid email and password' : null}
                 <button
                   type="submit"
                   onClick={() => {

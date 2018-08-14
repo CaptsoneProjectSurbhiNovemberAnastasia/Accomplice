@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 import { connect } from 'react-redux'
+
 class Navbar extends Component {
   render() {
     const { user } = this.props
@@ -10,17 +11,15 @@ class Navbar extends Component {
           <button
             className="navbar-toggler"
             type="button"
-            data-toggle="collapse"
             data-target=".dual-nav"
           >
-            <span className="navbar-toggler-icon" />
           </button>
-          <div className="navbar-collapse collapse dual-nav w-50 order-1 order-md-0">
+          <div className="navbar-collapse dual-nav w-50 order-1 order-md-0">
             <ul className="navbar-nav">
               <li className="nav-item">
-                <a className="nav-link" href="">
+                <NavLink to="/profile" className="nav-link">
                   <i className="fa fa-user" />
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -30,7 +29,7 @@ class Navbar extends Component {
           >
             Accomplice
           </NavLink>
-          <div className="navbar-collapse collapse dual-nav w-50 order-2">
+          <div className="navbar-collapse dual-nav w-50 order-2">
             <ul className="nav navbar-nav ml-auto">
               <li className="nav-item">
                 <NavLink to="/matches" className="nav-link">
