@@ -1,43 +1,43 @@
 import axios from 'axios'
 
-//ACTION TYPES
-export const GET_SUGGESTED_MATCHES = 'GET_SUGGESTED_MATCHES'
+export const GET_MATCHES = 'GET_MATCHES',
+  ADD_MATCH = 'ADD_MATCH'
 
-//ACTION CREATORS
-const getSuggestedMatches = suggestedMatches => {
-  return { type: GET_SUGGESTED_MATCHES, suggestedMatches }
+const getMatches = matches => ({ type: GET_MATCHES, matches }),
+  addMatch = match => ({ type: ADD_MATCH, match })
+
+export const fetchMatches = id => async dispatch => {
+  try {
+    const { data } = await axios.get(`http://localhost:8080/api/matches`)
+    dispatch(getMatches(data))
+  } catch (e) {
+    console.error(e)
+  }
 }
 
-//THUNK CREATORS
-export const fetchSuggestedMatches = id => {
-  return async dispatch => {
-    try {
-      const response = await axios.get(
-        `http://localhost:8080/api/user/${id}/suggestedmatches`
-      )
+export const matchWith = id => async dispatch => {
+  try {
+    const { data } = await axios.post(`http://localhost:8080/api/matches/${id}`)
+    if (data !== 'OK') {
+      dispatch(addMatch(data))
+    }
+  } catch (e) {
+    console.error(e)
+  }
+}
 
-      const suggestedMatches = response.data
-      console.log(suggestedMatches)
-      if (suggestedMatches === 'FORBIDDEN') {
-        dispatch(getSuggestedMatches(false))
-      } else if (suggestedMatches === 'No matches found') {
-        dispatch(getSuggestedMatches([]))
-      } else {
-        const action = getSuggestedMatches(suggestedMatches)
-        dispatch(action)
-      }
-    } catch (err) {
-      console.log(err)
+const matches = (state = [], action) => {
+  switch (action.type) {
+    case GET_MATCHES: {
+      return action.matches
+    }
+    case ADD_MATCH: {
+      return [...state, action.match]
+    }
+    default: {
+      return state
     }
   }
 }
 
-//REDUCER
-export default function(state = [], action) {
-  switch (action.type) {
-    case GET_SUGGESTED_MATCHES:
-      return action.suggestedMatches
-    default:
-      return state
-  }
-}
+export default matches

@@ -7,6 +7,7 @@ import AuthForm from './components/auth-form'
 import SuggestedMatches from './components/suggestedMatches'
 import InputQuestion from './components/inputQuestion'
 import { me } from './store'
+import AllMatches from './components/AllMatches'
 
 class Routes extends Component {
   componentDidMount() {
@@ -31,6 +32,7 @@ class Routes extends Component {
               <Route exact path="/user" component={User} />
               <Route path="/matchedUsers" component={MatchedUsers} />
               <Route path="/question" component={InputQuestion} />
+              <Route exact path="/matches" component={AllMatches} />
             </Switch>
           )}
           <Route exact path="/" component={AuthForm} />
