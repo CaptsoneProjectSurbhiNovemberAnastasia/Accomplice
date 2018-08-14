@@ -24,7 +24,7 @@ class Routes extends Component {
             <Switch>
               <Route
                 exact
-                path="/user/:id/suggestedMatches"
+                path="/user/:id/suggestedmatches"
                 component={SuggestedMatches}
               />
 

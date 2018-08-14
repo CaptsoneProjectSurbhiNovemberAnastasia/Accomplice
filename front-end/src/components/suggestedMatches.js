@@ -11,15 +11,24 @@ class SuggestedMatches extends Component {
   render() {
     const { suggestedMatches } = this.props
     console.log('PROPS:', this.props)
-    return (
-      <ul>
-        {!suggestedMatches
-          ? null
-          : suggestedMatches.map(user => (
-              <UserCard key={user.id} user={user} />
-            ))}
-      </ul>
-    )
+    if (!Array.isArray(suggestedMatches) && !suggestedMatches) {
+      return <div>You're not allowed to view this page.</div>
+    } else if (
+      Array.isArray(suggestedMatches) &&
+      suggestedMatches.length === 0
+    ) {
+      return <div>No matches found.</div>
+    } else {
+      return (
+        <ul>
+          {!suggestedMatches
+            ? null
+            : suggestedMatches.map(user => (
+                <UserCard key={user.id} user={user} />
+              ))}
+        </ul>
+      )
+    }
   }
 }
 
