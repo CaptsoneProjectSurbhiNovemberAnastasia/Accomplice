@@ -15,7 +15,7 @@ const getUser = user => ({
   user,
 })
 const logOutUser = () => ({
-  type: LOGOUT_USER,
+  type: LOGOUT_USER
 })
 
 // THUNK CREATORS
@@ -45,14 +45,15 @@ export const auth = (email, password, method) => async dispatch => {
   }
 }
 
-export const logout = () => dispatch => {
-  axios
-    .post('http://localhost:8080/auth/logout')
-    .then(_ => {
-      dispatch(logOutUser())
-      localStorage.clear()
-    })
-    .catch(err => console.log(err))
+export const logout = () => async dispatch => {
+  try {
+    await axios.post('http://localhost:8080/auth/logout')
+    dispatch(logOutUser())
+    localStorage.clear()
+    history.push('/')
+  } catch (err) {
+    console.log(err)
+  }
 }
 // updateUser expects the state's currentUser.id, and updated info to be prepackaged into a single, nested object
 export const updateUser = (userId, updateInfo) => dispatch => {
