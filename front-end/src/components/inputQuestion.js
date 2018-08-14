@@ -1,10 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-// import { fetchUsers } from '../store/action-creators.js'
-
-// import userIcon from './user-regular.svg'
-// import chatIcon from './comment-regular.svg'
 
 class InputQuestion extends Component {
   render() {

@@ -6,8 +6,12 @@ import MatchedUsers from './components/matchedUsers'
 import AuthForm from './components/auth-form'
 import SuggestedMatches from './components/suggestedMatches'
 import InputQuestion from './components/inputQuestion'
+import { me } from './store'
 
 class Routes extends Component {
+  componentDidMount() {
+    this.props.loadInitialData()
+  }
   render() {
     const { isLoggedIn } = this.props
     console.log('am i logged in?', isLoggedIn)
@@ -16,7 +20,7 @@ class Routes extends Component {
         <Switch>
           <Route exact path="/" component={AuthForm} />
 
-          {true && (
+          {isLoggedIn && (
             <Switch>
               <Route
                 exact
@@ -36,10 +40,17 @@ class Routes extends Component {
   }
 }
 
+const mapDispatch = dispatch => {
+  return {
+    loadInitialData() {
+      dispatch(me())
+    },
+  }
+}
 const mapState = state => ({ isLoggedIn: !!state.user.id })
 export default withRouter(
   connect(
     mapState,
-    null
+    mapDispatch
   )(Routes)
 )

@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-// import { Link } from 'react-router-dom'
 import FontAwesome from 'react-fontawesome'
-// import { sendEmail, unMatch } from '../store'
 import { connect } from 'react-redux'
-// import { EmailPreview } from './'
 
 class MatchedUsers extends Component {
   render() {
@@ -59,21 +56,7 @@ const mapState = state => ({
   matchedUsers: state.matchedUsers,
 })
 
-const mapDispatch = dispatch => ({
-  // onUnmatch(user, userId) {
-  //   if (
-  //     window.confirm(
-  //       `Are you sure you want to delete your match with ${user.name}?`
-  //     )
-  //   )
-  //     dispatch(unMatch(user.id, userId))
-  // },
-  // onClick(user, user) {
-  //   sendEmail(user, user)
-  // }
-})
-
 export default connect(
   mapState,
-  mapDispatch
+  null
 )(MatchedUsers)

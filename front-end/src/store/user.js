@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+axios.defaults.withCredentials = true
 
 // ACTION TYPES
 const GET_USER = 'GET_USER'
@@ -18,49 +19,35 @@ const logOutUser = () => ({
 })
 
 // THUNK CREATORS
-// export const fetchUser = id => {
-//   return async dispatch => {
-//     try {
-//       const response = await axios.get(`http://localhost:8080/api/user/${id}`)
-//       const currentUser = response.data
-//       const action = getUser(currentUser)
-//       dispatch(action)
-//     } catch (err) {
-//       console.log('User not found...', err)
-//     }
-//   }
-// }
 
 export const me = () => dispatch =>
   axios
-    .get('/auth/me')
+    .get('http://localhost:8080/auth/me')
     .then(res => dispatch(getUser(res.data || defaultUser)))
     .catch(err => console.log(err))
 
 export const auth = (email, password, method) => async dispatch => {
-  console.log('hit auth in store')
   let res
   try {
     res = await axios.post(`http://localhost:8080/auth/${method}`, {
       email,
       password,
-      method,
     })
-  } catch (e) {
-    return dispatch(getUser({ error: e }))
+  } catch (authError) {
+    return dispatch(getUser({ error: authError }))
   }
 
   try {
     dispatch(getUser(res.data))
     history.push('/question')
-  } catch (e) {
-    console.error(e)
+  } catch (dispatchOrHistoryErr) {
+    console.error(dispatchOrHistoryErr)
   }
 }
 
 export const logout = () => dispatch => {
   axios
-    .post('/auth/logout')
+    .post('http://localhost:8080/auth/logout')
     .then(_ => {
       dispatch(logOutUser())
       localStorage.clear()
@@ -70,7 +57,7 @@ export const logout = () => dispatch => {
 // updateUser expects the state's currentUser.id, and updated info to be prepackaged into a single, nested object
 export const updateUser = (userId, updateInfo) => dispatch => {
   axios
-    .put(`/api/userAccount/${userId}`, updateInfo)
+    .put(`http://localhost:8080/api/userAccount/${userId}`, updateInfo)
     .then(res => {
       dispatch(getUser(res.data))
     })
@@ -79,7 +66,9 @@ export const updateUser = (userId, updateInfo) => dispatch => {
 
 export const deleteAccount = userId => dispatch => {
   dispatch(logOutUser())
-  axios.delete(`/api/userAccount/${userId}`).catch(err => console.log(err))
+  axios
+    .delete(`http://localhost:8080/api/userAccount/${userId}`)
+    .catch(err => console.log(err))
 }
 
 // REDUCER

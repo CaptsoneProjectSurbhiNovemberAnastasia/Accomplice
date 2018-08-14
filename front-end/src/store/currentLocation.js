@@ -7,11 +7,11 @@ const REMOVE_LOCATION = 'REMOVE_LOCATION'
 // ACTION CREATORS
 const setCurrentLocation = location => ({
   type: SET_ZIPCODE,
-  location
+  location,
 })
 
 const removeCurrentZipcode = () => ({
-  type: REMOVE_LOCATION
+  type: REMOVE_LOCATION,
 })
 
 // THUNK
@@ -36,7 +36,7 @@ export default function(state = [], action) {
     case SET_ZIPCODE:
       return [action.location]
     case REMOVE_LOCATION:
-      return (state = [])
+      return []
     default:
       return state
   }

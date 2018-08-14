@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
-import FontAwesome from 'react-fontawesome'
 import { auth } from '../store'
 import logo from '../styles/logo.png'
 
@@ -9,7 +8,6 @@ import logo from '../styles/logo.png'
  * COMPONENT
  */
 const AuthForm = props => {
-  console.log('Inside Authform**********')
   const { handleSubmit } = props
   let type
   return (
@@ -131,7 +129,7 @@ const mapState = state => ({
 })
 
 const mapDispatch = (dispatch, ownProps) => ({
-  handleSubmit(evt, type) {
+  handleSubmit: (evt, type) => {
     evt.preventDefault()
     const email = evt.target.email.value
     const password = evt.target.password.value
