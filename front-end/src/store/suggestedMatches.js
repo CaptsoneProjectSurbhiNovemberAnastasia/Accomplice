@@ -17,7 +17,6 @@ export const fetchSuggestedMatches = id => {
       )
 
       const suggestedMatches = response.data
-      console.log(suggestedMatches)
       if (suggestedMatches === 'FORBIDDEN') {
         dispatch(getSuggestedMatches(false))
       } else if (suggestedMatches === 'No matches found') {

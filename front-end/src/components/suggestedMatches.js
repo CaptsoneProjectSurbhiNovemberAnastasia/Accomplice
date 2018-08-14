@@ -10,7 +10,6 @@ class SuggestedMatches extends Component {
 
   render() {
     const { suggestedMatches } = this.props
-    console.log('PROPS:', this.props)
     if (!Array.isArray(suggestedMatches) && !suggestedMatches) {
       return <div>You're not allowed to view this page.</div>
     } else if (
@@ -33,7 +32,6 @@ class SuggestedMatches extends Component {
 }
 
 const mapState = state => {
-  console.log(state)
   return {
     suggestedMatches: state.suggestedMatches,
   }

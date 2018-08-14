@@ -8,12 +8,11 @@ class AllMatches extends Component {
   }
   render() {
     const { matches } = this.props
-    console.log('Matches', matches)
     return (
       <ul>
         {matches ? (
           matches.map(match => (
-            <li>{match.firstName + ' ' + match.lastName}</li>
+            <li key={match.id}>{match.firstName + ' ' + match.lastName}</li>
           ))
         ) : (
           <div>No matches yet!</div>
