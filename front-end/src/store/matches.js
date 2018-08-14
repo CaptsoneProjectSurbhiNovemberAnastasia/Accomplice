@@ -25,8 +25,8 @@ export const matchWith = id => async dispatch => {
     console.error(e)
   }
 }
-
-const matches = (state = [], action) => {
+const initialState = []
+const matches = (state = initialState, action) => {
   switch (action.type) {
     case GET_MATCHES: {
       return action.matches

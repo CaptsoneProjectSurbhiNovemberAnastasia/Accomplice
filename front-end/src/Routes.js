@@ -8,10 +8,12 @@ import SuggestedMatches from './components/suggestedMatches'
 import InputQuestion from './components/inputQuestion'
 import { me } from './store'
 import AllMatches from './components/AllMatches'
+import Chat from './components/Chat'
+import { fetchMatches } from './store'
 
 class Routes extends Component {
   componentDidMount() {
-    this.props.loadInitialData()
+    this.props.loadInitialData(this.props.user.id)
   }
   render() {
     const { isLoggedIn } = this.props
@@ -33,6 +35,7 @@ class Routes extends Component {
               <Route path="/matchedUsers" component={MatchedUsers} />
               <Route path="/question" component={InputQuestion} />
               <Route exact path="/matches" component={AllMatches} />
+              <Route path="/chat/:id" component={Chat} />
             </Switch>
           )}
           <Route exact path="/" component={AuthForm} />
@@ -44,12 +47,13 @@ class Routes extends Component {
 
 const mapDispatch = dispatch => {
   return {
-    loadInitialData() {
+    loadInitialData(id) {
       dispatch(me())
+      dispatch(fetchMatches(id))
     },
   }
 }
-const mapState = state => ({ isLoggedIn: !!state.user.id })
+const mapState = state => ({ isLoggedIn: !!state.user.id, user: state.user })
 export default withRouter(
   connect(
     mapState,

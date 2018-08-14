@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchMatches } from '../store'
+import MatchedUser from './MatchedUser'
+import { NavLink } from 'react-router-dom'
 
 class AllMatches extends Component {
   componentDidMount() {
@@ -10,10 +12,8 @@ class AllMatches extends Component {
     const { matches } = this.props
     return (
       <ul>
-        {matches ? (
-          matches.map(match => (
-            <li key={match.id}>{match.firstName + ' ' + match.lastName}</li>
-          ))
+        {matches && matches.length ? (
+          matches.map(user => <MatchedUser user={user} key={user.id} />)
         ) : (
           <div>No matches yet!</div>
         )}

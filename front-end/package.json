@@ -19,7 +19,9 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
     "scss-tokenizer": "^0.2.3",
-    "socket.io": "^2.1.1"
+    "sendbird": "^3.0.70",
+    "socket.io": "^2.1.1",
+    "talkjs": "^0.5.0"
   },
   "scripts": {
     "start": "react-scripts start",
