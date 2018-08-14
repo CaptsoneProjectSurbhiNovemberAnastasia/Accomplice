@@ -8,6 +8,7 @@ class AllMatches extends Component {
   }
   render() {
     const { matches } = this.props
+    console.log('Matches', matches)
     return (
       <ul>
         {matches ? (
