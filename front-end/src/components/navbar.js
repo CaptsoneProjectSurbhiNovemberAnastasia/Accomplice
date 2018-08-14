@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-
+import { NavLink } from 'react-router-dom'
+import { connect } from 'react-redux'
 class Navbar extends Component {
   render() {
+    const { user } = this.props
     return (
       <nav className="navbar navbar-dark navbar-expand-md bg-success justify-content-between">
         <div className="container-fluid">
@@ -22,18 +24,18 @@ class Navbar extends Component {
               </li>
             </ul>
           </div>
-          <a
-            href="/"
+          <NavLink
+            to={`/user/${user.id}/suggestedmatches`}
             className="navbar-brand mx-auto d-block text-center order-0 order-md-1 w-25"
           >
             Accomplice
-          </a>
+          </NavLink>
           <div className="navbar-collapse collapse dual-nav w-50 order-2">
             <ul className="nav navbar-nav ml-auto">
               <li className="nav-item">
-                <a className="nav-link" href="">
+                <NavLink to="/matches" className="nav-link">
                   <i className="fa fa-comment" />
-                </a>
+                </NavLink>
               </li>
             </ul>
           </div>
@@ -43,4 +45,5 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar
+const mapState = state => ({ user: state.user })
+export default connect(mapState)(Navbar)

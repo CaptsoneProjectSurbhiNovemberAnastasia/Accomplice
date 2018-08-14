@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
+import { NavLink } from 'react-router-dom'
 
 class InputQuestion extends Component {
   render() {
-    const { handleSubmit } = this.props
+    const { handleSubmit, user } = this.props
     let type
     return (
       <div>
@@ -17,14 +18,7 @@ class InputQuestion extends Component {
           </div>
 
           <div className="group">
-            <button
-              type="submit"
-              onClick={() => {
-                type = 'go'
-              }}
-            >
-              Go
-            </button>
+            <NavLink to={`/user/${user.id}/suggestedmatches`}>GO</NavLink>
           </div>
         </form>
       </div>
