@@ -20,7 +20,7 @@ class UserCard extends Component {
 }
 
 const mapDispatch = dispatch => ({
-  matchWithUser: id => dispatch(matchWith(id)),
+  matchWithUser: id => dispatch(matchWith(id))
 })
 export default connect(
   null,
