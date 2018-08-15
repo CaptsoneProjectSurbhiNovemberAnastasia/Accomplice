@@ -22,7 +22,7 @@ const UserProfileForm = props => {
           </div>
           <div className="control">
               <label htmlFor="imageUrl">Profile Picture URL</label>
-              <input type="text" name="imageUrl" className="form-control" defaultValue={user.age}/>
+              <input type="text" name="imageUrl" className="form-control" defaultValue={user.imageUrl}/>
           </div>
           <div className="control">
               <label htmlFor="description">Description</label>

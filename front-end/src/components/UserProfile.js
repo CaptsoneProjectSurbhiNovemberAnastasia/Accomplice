@@ -15,9 +15,7 @@ class UserProfile extends Component {
       <div className="container">
         <div className="row profile_box">
           <div>
-            <div className="outter">
-            <img src={user.imageUrl} alt="" className="image-circle"/>
-            </div>
+              <img src={user.imageUrl}/>
               <h2>Hi {user.firstName}</h2>
           </div>
           <UserProfileForm user={user} handleSubmit={this.props.handleSubmit} handleClick={this.props.handleClick}/>
