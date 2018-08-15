@@ -26,26 +26,19 @@ class Routes extends Component {
       <div>
         <Switch>
           <Route exact path="/" component={AuthForm} />
-
           {isLoggedIn && (
-            <Switch>
-              <Route
-                exact
-                path="/user/:id/suggestedmatches"
-                component={SuggestedMatches}
-              />
-
+          <Switch>
+            {/* Routes placed here are only available after logging in */}
+              <Route exact path="/user/:id/suggestedmatches" component={SuggestedMatches} />
               <Route exact path="/user" component={User} />
               <Route path="/matchedUsers" component={MatchedUsers} />
               <Route path="/question" component={InputQuestion} />
               <Route exact path="/matches" component={AllMatches} />
               <Route path="/chat/:id" component={Chat} />
-
               <Route exact path="/profile" component={UserProfile} />
-
-            </Switch>
+          </Switch>
           )}
-          <Route exact path="/" component={AuthForm} />
+          <Route component={AuthForm} />
         </Switch>
       </div>
     )

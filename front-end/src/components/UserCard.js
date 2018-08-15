@@ -8,7 +8,7 @@ class UserCard extends Component {
     this.props.matchWithUser(+this.props.user.id)
   }
   render() {
-    const { user, loggedInUser } = this.props
+    const { user } = this.props
     return (
       <li>
         <h4>{user.firstName + ' ' + user.lastName}</h4>
