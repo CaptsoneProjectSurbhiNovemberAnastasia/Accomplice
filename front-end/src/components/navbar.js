@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 class Navbar extends Component {
   render() {
     const { user } = this.props
+
     return (
       <nav className="navbar navbar-dark navbar-expand-md bg-success justify-content-between">
         <div className="container-fluid">

@@ -1,6 +1,6 @@
 import React from 'react'
 import { NavLink } from 'react-router-dom'
-import { connect } from 'react-redux'
+
 const MatchedUser = props => {
   const { user } = props
   return (

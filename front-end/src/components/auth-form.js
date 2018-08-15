@@ -73,23 +73,26 @@ const AuthForm = props => {
           <div className="sign-up-htm">
             {/*signup form */}
             <form onSubmit={event => handleSubmit(event, type)}>
+
               <div className="group">
                 <label htmlFor="email">
                   <small>Email</small>
                 </label>
                 <input name="email" type="text" />
               </div>
+
               <div className="group">
                 <label htmlFor="password">
                   <small>Password</small>
                 </label>
                 <input name="password" type="password" />
               </div>
+
               <div className="group">
-                <label htmlFor="password">
+                {/* <label htmlFor="password">
                   <small>Verify Password</small>
                 </label>
-                <input name="password" type="password" />
+                <input name="password" type="password" /> */}
               </div>
               <div className="group">
                 <button
@@ -119,13 +122,6 @@ const AuthForm = props => {
   )
 }
 
-/**
- * CONTAINER
- *   Note that we have two different sets of 'mapStateToProps' functions -
- *   one for Login, and one for Signup. However, they share the same 'mapDispatchToProps'
- *   function, and share the same Component. This is a good example of how we
- *   can stay DRY with interfaces that are very similar to each other!
- */
 const mapState = state => ({
   error: state.user.error,
 })

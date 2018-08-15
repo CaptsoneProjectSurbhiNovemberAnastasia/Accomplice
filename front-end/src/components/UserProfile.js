@@ -1,14 +1,26 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { logout } from '../store'
+import UserProfileForm from './UserProfileForm'
 
 class UserProfile extends Component {
   render() {
-    const {handleClick} = this.props
+    const {user} = this.props
 
+    if (user && !user.id) {
+      return null
+    }
     return (
-      <div>
-        <button type="button" onClick={handleClick}>Logout</button>
+      <div className="container">
+        <div className="row profile_box">
+          <div>
+            <div className="outter">
+            <img src={user.imageUrl} alt="" className="image-circle"/>
+            </div>
+              <h2>Hi {user.firstName}</h2>
+          </div>
+          <UserProfileForm user={user} handleSubmit={this.props.handleSubmit} handleClick={this.props.handleClick}/>
+        </div>
       </div>
     )
   }
@@ -16,7 +28,7 @@ class UserProfile extends Component {
 
 const mapState = state => {
   return {
-    isLoggedIn: !!state.user.id
+    user: state.user
   }
 }
 
@@ -24,6 +36,10 @@ const mapDispatch = dispatch => {
   return {
     handleClick() {
       dispatch(logout())
+    },
+    handleSubmit(evt) {
+      evt.preventDefault()
+      //ADD UPDATE USER PROFILE THUNK
     }
   }
 }
