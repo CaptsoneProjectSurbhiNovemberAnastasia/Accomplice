@@ -22,7 +22,7 @@ class InputQuestion extends Component {
           </div>
           <div>
             <label htmlFor="question">
-              <NavLink>Don't know.. get a clue!!</NavLink>
+              <NavLink to="/undecided">Don't know... get a clue!!</NavLink>
             </label>
           </div>
         </form>
@@ -33,7 +33,7 @@ class InputQuestion extends Component {
 
 const mapState = state => ({
   error: state.user.error,
-  user: state.user
+  user: state.user,
 })
 
 export default withRouter(

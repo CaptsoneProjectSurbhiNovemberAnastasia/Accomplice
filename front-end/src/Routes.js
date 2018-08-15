@@ -8,12 +8,10 @@ import SuggestedMatches from './components/suggestedMatches'
 import InputQuestion from './components/inputQuestion'
 import { me } from './store'
 import AllMatches from './components/AllMatches'
-
 import Chat from './components/Chat'
 import { fetchMatches } from './store'
-
 import UserProfile from './components/UserProfile'
-
+import Undecided from './components/Undecided'
 
 class Routes extends Component {
   componentDidMount() {
@@ -27,16 +25,21 @@ class Routes extends Component {
         <Switch>
           <Route exact path="/" component={AuthForm} />
           {isLoggedIn && (
-          <Switch>
-            {/* Routes placed here are only available after logging in */}
-              <Route exact path="/user/:id/suggestedmatches" component={SuggestedMatches} />
+            <Switch>
+              {/* Routes placed here are only available after logging in */}
+              <Route
+                exact
+                path="/user/:id/suggestedmatches"
+                component={SuggestedMatches}
+              />
               <Route exact path="/user" component={User} />
               <Route path="/matchedUsers" component={MatchedUsers} />
               <Route path="/question" component={InputQuestion} />
               <Route exact path="/matches" component={AllMatches} />
               <Route path="/chat/:id" component={Chat} />
               <Route exact path="/profile" component={UserProfile} />
-          </Switch>
+              <Route path="/undecided" component={Undecided} />
+            </Switch>
           )}
           <Route component={AuthForm} />
         </Switch>
