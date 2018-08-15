@@ -36,10 +36,13 @@ export const auth = (email, password, method) => async dispatch => {
   } catch (authError) {
     return dispatch(getUser({ error: authError }))
   }
-
   try {
     dispatch(getUser(res.data))
-    history.push('/question')
+    if (res.data.firstName === null) {
+      history.push('/profile')
+    } else {
+      history.push('/question')
+    }
   } catch (dispatchOrHistoryErr) {
     console.error(dispatchOrHistoryErr)
   }
