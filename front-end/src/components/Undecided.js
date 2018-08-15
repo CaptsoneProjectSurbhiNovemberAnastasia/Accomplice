@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchTags, updateUser } from '../store'
+import { fetchTags, setTags } from '../store'
 import Select from 'react-select'
 
 class Undecided extends Component {
@@ -23,9 +23,11 @@ class Undecided extends Component {
     const { selectedOptions } = this.state
     let options
     if (tags) {
+      console.log(tags)
       options = tags.map(tag => ({
         value: tag.name.toLowerCase(),
         label: tag.name,
+        id: tag.id,
       }))
     }
     return (
@@ -47,7 +49,7 @@ class Undecided extends Component {
 
 const mapDispatch = dispatch => ({
   loadTags: () => dispatch(fetchTags()),
-  chooseTags: tags => dispatch(updateUser(tags)),
+  chooseTags: tags => dispatch(setTags(tags)),
 })
 const mapState = state => ({
   tags: state.tags,
