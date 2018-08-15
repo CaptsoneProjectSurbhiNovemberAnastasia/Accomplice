@@ -58,14 +58,15 @@ export const logout = () => async dispatch => {
     console.log(err)
   }
 }
-// updateUser expects the state's currentUser.id, and updated info to be prepackaged into a single, nested object
-export const updateUser = (userId, updateInfo) => dispatch => {
-  axios
-    .put(`http://localhost:8080/api/userAccount/${userId}`, updateInfo)
-    .then(res => {
-      dispatch(getUser(res.data))
-    })
-    .catch(error => console.error(error))
+// editUser expects the state's currentUser.id, and updated info to be prepackaged into a single, nested object
+export const updateUser = (updateInfo) => async dispatch => {
+  try {
+    const id = updateInfo.id
+    let updatedUser = await axios.put(`http://localhost:8080/api/user/${id}`, updateInfo)
+    dispatch(getUser(updatedUser))
+  } catch (err) {
+    console.log(err)
+  }
 }
 
 export const deleteAccount = userId => dispatch => {

@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { fetchMatches } from '../store'
 import MatchedUser from './MatchedUser'
-import { NavLink } from 'react-router-dom'
 
 class AllMatches extends Component {
   componentDidMount() {
