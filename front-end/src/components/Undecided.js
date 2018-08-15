@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { fetchTags, setTags } from '../store'
+import { setTags } from '../store'
 import Select from 'react-select'
 
 class Undecided extends Component {
   state = {
-    selectedOptions: null,
+    selectedOptions: [],
   }
 
   handleChange = selectedOptions => {
@@ -16,14 +16,17 @@ class Undecided extends Component {
     this.props.chooseTags(this.state.selectedOptions)
   }
   componentDidMount() {
-    this.props.loadTags()
+    // i can't get the form to populate with previously selected tags, but they stay in the store and db
+    this.setState({
+      selectedOptions: this.props.tags.filter(tag => tag.selected),
+    })
   }
   render() {
     const { tags } = this.props
     const { selectedOptions } = this.state
     let options
+
     if (tags) {
-      console.log(tags)
       options = tags.map(tag => ({
         value: tag.name.toLowerCase(),
         label: tag.name,
@@ -48,7 +51,6 @@ class Undecided extends Component {
 }
 
 const mapDispatch = dispatch => ({
-  loadTags: () => dispatch(fetchTags()),
   chooseTags: tags => dispatch(setTags(tags)),
 })
 const mapState = state => ({
