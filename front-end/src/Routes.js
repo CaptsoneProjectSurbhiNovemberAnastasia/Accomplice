@@ -19,6 +19,7 @@ class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData(this.props.user.id)
   }
+
   render() {
     const { isLoggedIn } = this.props
     return (
@@ -59,6 +60,7 @@ const mapDispatch = dispatch => {
     },
   }
 }
+
 const mapState = state => ({ isLoggedIn: !!state.user.id, user: state.user })
 export default withRouter(
   connect(
