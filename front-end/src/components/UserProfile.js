@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { logout } from '../store'
+import { updateUser } from '../store/user'
 import UserProfileForm from './UserProfileForm'
 
 class UserProfile extends Component {
@@ -32,14 +33,32 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = dispatch => {
+const mapDispatch = (dispatch) => {
+
   return {
-    handleClick() {
+    handleClick(evt) {
+      evt.preventDefault()
       dispatch(logout())
     },
-    handleSubmit(evt) {
+    handleSubmit (evt, user) {
+      const id = user.id
       evt.preventDefault()
-      //ADD UPDATE USER PROFILE THUNK
+      const firstName = evt.target.firstName.value
+      const lastName = evt.target.lastName.value
+      const age = evt.target.age.value
+      const imageUrl = evt.target.imageUrl.value
+      const description = evt.target.description.value
+
+      dispatch(updateUser(
+        {
+          id,
+          firstName,
+          lastName,
+          imageUrl,
+          age,
+          description
+        }
+      ))
     }
   }
 }
