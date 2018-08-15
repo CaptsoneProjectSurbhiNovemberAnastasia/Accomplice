@@ -6,19 +6,25 @@ import UserProfileForm from './UserProfileForm'
 
 class UserProfile extends Component {
   render() {
-    const {user} = this.props
+    const { user } = this.props
 
     if (user && !user.id) {
       return null
     }
     return (
-      <div className="container">
-        <div className="row profile_box">
-          <div>
-              <img src={user.imageUrl}/>
-              <h2>Hi {user.firstName}</h2>
+      <div className="form-row">
+        <div className="form-row profile_box mx-auto ">
+          <div className="card-img-top ">
+            <img src={user.imageUrl} />
+            <h2>Hi {user.firstName}</h2>
           </div>
-          <UserProfileForm user={user} handleSubmit={this.props.handleSubmit} handleClick={this.props.handleClick}/>
+          <div className="ml-5">
+            <UserProfileForm
+              user={user}
+              handleSubmit={this.props.handleSubmit}
+              handleClick={this.props.handleClick}
+            />
+          </div>
         </div>
       </div>
     )
@@ -31,14 +37,13 @@ const mapState = state => {
   }
 }
 
-const mapDispatch = (dispatch) => {
-
+const mapDispatch = dispatch => {
   return {
     handleClick(evt) {
       evt.preventDefault()
       dispatch(logout())
     },
-    handleSubmit (evt, user) {
+    handleSubmit(evt, user) {
       const id = user.id
       evt.preventDefault()
       const firstName = evt.target.firstName.value
@@ -47,19 +52,21 @@ const mapDispatch = (dispatch) => {
       const imageUrl = evt.target.imageUrl.value
       const description = evt.target.description.value
 
-      dispatch(updateUser(
-        {
+      dispatch(
+        updateUser({
           id,
           firstName,
           lastName,
           imageUrl,
           age,
           description
-        }
-      ))
+        })
+      )
     }
   }
 }
 
-export default connect(mapState, mapDispatch)(UserProfile)
-
+export default connect(
+  mapState,
+  mapDispatch
+)(UserProfile)
