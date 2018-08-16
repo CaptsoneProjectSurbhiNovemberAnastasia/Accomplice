@@ -7,18 +7,18 @@ const REMOVE_LOCATION = 'REMOVE_LOCATION'
 // ACTION CREATORS
 const setCurrentLocation = location => ({
   type: SET_ZIPCODE,
-  location,
+  location
 })
 
 const removeCurrentZipcode = () => ({
-  type: REMOVE_LOCATION,
+  type: REMOVE_LOCATION
 })
 
 // THUNK
 
 export const getCurrentZipcode = (lat, lng) => dispatch => {
   axios
-    .get(`/api/zipcode/?lat=${lat}&lng=${lng}`)
+    .get(`http://localhost:8080/api/zipcode/?lat=${lat}&lng=${lng}`)
     .then(res => {
       dispatch(setCurrentLocation(res.data))
     })

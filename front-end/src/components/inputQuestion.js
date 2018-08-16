@@ -4,6 +4,7 @@ import { withRouter } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import { setActivity } from '../store'
 import Select from 'react-select'
+import CurrentLocation from './currentLocation'
 
 class InputQuestion extends Component {
   state = {
@@ -77,6 +78,7 @@ class InputQuestion extends Component {
             <NavLink to="/undecided">Don't know... get a clue!</NavLink>
           </label>
         </div>
+        <CurrentLocation />
       </div>
     )
   }
