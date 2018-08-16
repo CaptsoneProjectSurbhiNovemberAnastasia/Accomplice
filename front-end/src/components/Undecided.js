@@ -21,10 +21,10 @@ class Undecided extends Component {
 }
 
 const mapDispatch = dispatch => ({
-  loadTags: () => dispatch(fetchTags()),
+  loadTags: () => dispatch(fetchTags())
 })
 const mapState = state => ({
-  tags: state.tags,
+  tags: state.tags
 })
 export default connect(
   mapState,
