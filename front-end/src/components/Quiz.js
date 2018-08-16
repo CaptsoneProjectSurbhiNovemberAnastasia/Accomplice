@@ -39,14 +39,16 @@ class Quiz extends Component {
     })
   }
 
-  handleClick = (evt) => {
+  handleClick = (evt, id) => {
     evt.preventDefault()
+    console.log(id)
     this.currentQuestion()
   }
 
 
   render() {
     const {questions, handleSubmit} = this.props
+
     return (
       (questions.length === 0) ? null :
       <div>
@@ -59,8 +61,9 @@ class Quiz extends Component {
 
 const mapDispatch = dispatch => ({
   loadQuestions: () => dispatch(fetchQuestions()),
-  handleSubmit (evt) {
+  handleSubmit (evt, id) {
     evt.preventDefault()
+    console.log(id)
     //dispatch final values to the store to update user_trait values
   }
 })
