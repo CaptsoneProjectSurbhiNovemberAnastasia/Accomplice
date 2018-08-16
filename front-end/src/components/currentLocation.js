@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { getCurrentZipcode, removeCurrentLocation } from '../store'
+import { removeCurrentLocation, updateUser } from '../store'
 
 class CurrentLocation extends Component {
   constructor(props) {
@@ -13,6 +13,7 @@ class CurrentLocation extends Component {
     this.getLocation = this.getLocation.bind(this)
     this.showPosition = this.showPosition.bind(this)
     this.errorHandler = this.errorHandler.bind(this)
+    this.onLocation = this.onLocation.bind(this)
   }
 
   getLocation() {
@@ -26,14 +27,16 @@ class CurrentLocation extends Component {
       console.log('geolocation IS NOT available')
     }
   }
-
+  onLocation(lat, lng) {
+    this.props.updateLocation(lat, lng, this.props.user.id)
+  }
   showPosition(position) {
     var latitude = position.coords.latitude
     var longitude = position.coords.longitude
     this.setState({
       latLng: [latitude, longitude]
     })
-    this.props.onLocation(this.state.latLng[0], this.state.latLng[1])
+    this.onLocation(this.state.latLng[0], this.state.latLng[1])
   }
 
   errorHandler(err) {
@@ -72,15 +75,17 @@ class CurrentLocation extends Component {
   }
 }
 
-const mapState = state => ({ currentLocation: state.currentLocation })
+const mapState = state => ({
+  currentLocation: state.currentLocation,
+  user: state.user
+})
 
 const mapDispatch = dispatch => ({
-  onLocation(lat, lng) {
-    console.log('LAT', lat, 'LNG', lng)
-    dispatch(getCurrentZipcode(lat, lng))
-  },
   onTurnOff() {
     dispatch(removeCurrentLocation())
+  },
+  updateLocation(latitude, longitude, id) {
+    dispatch(updateUser({ latitude, longitude, id }))
   }
 })
 

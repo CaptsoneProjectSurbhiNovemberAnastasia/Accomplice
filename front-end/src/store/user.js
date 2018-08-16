@@ -12,10 +12,10 @@ const defaultUser = {}
 // ACTION CREATORS
 const getUser = user => ({
     type: GET_USER,
-    user,
+    user
   }),
   logOutUser = () => ({
-    type: LOGOUT_USER,
+    type: LOGOUT_USER
   })
 
 // THUNK CREATORS
@@ -31,7 +31,7 @@ export const auth = (email, password, method) => async dispatch => {
   try {
     res = await axios.post(`http://localhost:8080/auth/${method}`, {
       email,
-      password,
+      password
     })
   } catch (authError) {
     return dispatch(getUser({ error: authError }))
@@ -61,12 +61,13 @@ export const logout = () => async dispatch => {
 // editUser expects the state's currentUser.id, and updated info to be prepackaged into a single, nested object
 export const updateUser = updateInfo => async dispatch => {
   try {
+    console.log(updateInfo)
     const id = updateInfo.id
-    let updatedUser = await axios.put(
+    const { data } = await axios.put(
       `http://localhost:8080/api/user/${id}`,
       updateInfo
     )
-    dispatch(getUser(updatedUser))
+    dispatch(getUser(data))
   } catch (err) {
     console.log(err)
   }
