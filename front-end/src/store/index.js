@@ -6,8 +6,10 @@ import suggestedMatches from './suggestedMatches'
 import user from './user'
 import currentLocation from './currentLocation'
 import form from './form'
+import tags from './tags'
 import matches from './matches'
 import questions from './question'
+import activity from './activity'
 
 const reducer = combineReducers({
   user,
@@ -15,7 +17,9 @@ const reducer = combineReducers({
   suggestedMatches,
   form,
   matches,
-  questions
+  questions,
+  tags,
+  activity,
 })
 
 // Use for production
@@ -36,5 +40,7 @@ export * from './currentLocation'
 export * from './form'
 export * from './matches'
 export * from './question'
+export * from './tags'
+export * from './activity'
 
 export default store
