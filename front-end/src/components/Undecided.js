@@ -54,7 +54,7 @@ const mapDispatch = dispatch => ({
   chooseTags: tags => dispatch(setTags(tags)),
 })
 const mapState = state => ({
-  tags: state.tags,
+  tags: state.tags
 })
 export default connect(
   mapState,
