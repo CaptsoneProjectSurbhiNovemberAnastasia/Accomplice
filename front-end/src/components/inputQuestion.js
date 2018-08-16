@@ -2,43 +2,99 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { NavLink } from 'react-router-dom'
+import { setActivity } from '../store'
+import Select from 'react-select'
 
 class InputQuestion extends Component {
+  state = {
+    selectedOptions: [],
+    activity: '',
+  }
+
+  handleSubmit = evt => {
+    evt.preventDefault()
+    this.props.chooseActivity(this.state.activity, this.state.selectedOptions)
+  }
+
+  handleChange = selectedOptions => {
+    if (selectedOptions.target) {
+      // it is an event
+      this.setState({
+        [selectedOptions.target.name]: selectedOptions.target.value,
+      })
+    } else {
+      // it is the options array from react-select
+      this.setState({ selectedOptions })
+    }
+  }
+
   render() {
-    const { handleSubmit, user } = this.props
-    let type
+    const { user, tags } = this.props
+
+    let options
+    if (tags) {
+      options = tags.map(tag => ({
+        value: tag.name.toLowerCase(),
+        label: tag.name,
+        id: tag.id,
+        key: tag.id,
+      }))
+    }
+
     return (
       <div>
-        <form onSubmit={event => handleSubmit(event, type)}>
+        <form onSubmit={this.handleSubmit}>
           <div className="group">
-            <label htmlFor="question">
-              <small>what would you like to do today ?</small>
+            <label htmlFor="activity">
+              <div>What would you like to do today?</div>
             </label>
-            <input name="question" type="text" placeholder="e.g. Hiking" />
-          </div>
-
-          <div className="group">
-            <NavLink to={`/user/${user.id}/suggestedmatches`}>GO</NavLink>
-          </div>
-          <div>
+            <input
+              name="activity"
+              type="text"
+              placeholder="e.g. Go on a hike"
+              onChange={this.handleChange}
+            />
             <label htmlFor="question">
-              <NavLink to="/undecided">Don't know... get a clue!!</NavLink>
+              <div> Tag your activity so others can find you! </div>
             </label>
+            <Select
+              value={this.selectedOptions}
+              onChange={this.handleChange}
+              options={options}
+              isMulti
+            />
+            <button type="submit">GO</button>
           </div>
         </form>
+        <div className="group">
+          <NavLink to={`/user/${user.id}/suggestedmatches`}>
+            See people to match with!
+          </NavLink>
+        </div>
+
+        <div>
+          <label htmlFor="question">
+            <NavLink to="/undecided">Don't know... get a clue!</NavLink>
+          </label>
+        </div>
       </div>
     )
   }
 }
 
 const mapState = state => ({
-  error: state.user.error,
   user: state.user,
+  tags: state.tags,
+})
+const mapDispatch = dispatch => ({
+  chooseActivity: (activity, tags) => {
+    dispatch(setActivity(activity, tags))
+  },
 })
 
 export default withRouter(
   connect(
     mapState,
-    null
+    mapDispatch
   )(InputQuestion)
 )
