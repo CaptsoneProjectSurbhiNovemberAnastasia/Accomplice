@@ -17,6 +17,7 @@ class Undecided extends Component {
   }
   componentDidMount() {
     // i can't get the form to populate with previously selected tags, but they stay in the store and db
+    console.log(this.props.tags)
     this.setState({
       selectedOptions: this.props.tags.filter(tag => tag.selected),
     })
@@ -31,6 +32,7 @@ class Undecided extends Component {
         value: tag.name.toLowerCase(),
         label: tag.name,
         id: tag.id,
+        key: tag.id,
       }))
     }
     return (
