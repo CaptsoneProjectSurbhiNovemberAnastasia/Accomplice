@@ -9,8 +9,8 @@ const getQuestions = questions => ({
 
 export const fetchQuestions = () => async dispatch => {
   try {
-    const { data } = await axios.get('http://localhost:8080/api/questions')
-    dispatch(getQuestions(data))
+    const questions = await axios.get('http://localhost:8080/api/questions')
+    dispatch(getQuestions(questions.data))
   } catch (err) {
     console.log(err)
   }

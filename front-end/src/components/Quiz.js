@@ -4,28 +4,75 @@ import { connect } from 'react-redux'
 import { fetchQuestions } from '../store'
 
 class Quiz extends Component {
+  constructor() {
+    super()
+    this.state = {
+      i: 0,
+      answer: 0,
+      extraversionValue: 0,
+      emotionalStabilityValue: 0,
+      agreeablenessValue: 0,
+      conscientiousnessValue: 0,
+      intellectImaginationValue: 0
+    }
+  }
+
   componentDidMount() {
     this.props.loadQuestions()
   }
 
-  render() {
-    const {questions} = this.props
+  currentQuestion = () => {
+    this.setState({
+      i: this.state.i+1,
+      answer: this.state.answer,
+      extraversionValue: this.state.extraversionValue,
+      emotionalStabilityValue: this.state.emotionalStabilityValue,
+      agreeablenessValue: this.state.agreeablenessValue,
+      conscientiousnessValue: this.state.conscientiousnessValue,
+      intellectImaginationValue: this.state.intellectImaginationValue
+    })
+  }
 
+  handleChange = (evt) => {
+    this.setState({
+      answer: evt.target.value
+    })
+  }
+
+  handleClick = (evt) => {
+    evt.preventDefault()
+    this.currentQuestion()
+  }
+
+
+  render() {
+    const {questions, handleSubmit} = this.props
     return (
       (questions.length === 0) ? null :
       <div>
-        Quiz
-        <RadioForm questions={questions}/>
+        Personality Quiz
+        <RadioForm answer={this.state.answer} question ={questions[this.state.i]} handleChange={this.handleChange} handleSubmit={handleSubmit} handleClick={this.handleClick}/>
       </div>
     )
   }
 }
 
 const mapDispatch = dispatch => ({
-  loadQuestions: () => dispatch(fetchQuestions())
+  loadQuestions: () => dispatch(fetchQuestions()),
+  handleSubmit (evt) {
+    evt.preventDefault()
+    //dispatch final values to the store to update user_trait values
+  }
 })
 
-const mapState = state => ({ questions: state.questions })
+const mapState = state => ({
+  questions: state.questions,
+  extraversionValue: state.extraversionValue,
+  emotionalStabilityValue: state.emotionalStabilityValue,
+  agreeablenessValue: state.agreeablenessValue,
+  conscientiousnessValue: state.conscientiousnessValue,
+  intellectImaginationValue: state.intellectImaginationValue
+})
 
 
 export default connect(mapState, mapDispatch)(Quiz)
