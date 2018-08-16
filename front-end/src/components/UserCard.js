@@ -14,7 +14,7 @@ class UserCard extends Component {
       <div id="userCard" className="collapsed">
         <div>
           <div id="picContainer">
-            <img className="userPic rounded" src={user.imageUrl} />
+            <img className="userPic rounded" src={user.imageUrl} alt="" />
           </div>
           <li>
             <h4>{user.firstName + ' ' + user.lastName}</h4>
