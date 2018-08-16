@@ -1,4 +1,4 @@
-body {
+/* body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
@@ -13,12 +13,12 @@ body {
   font-family: 'Montserrat', sans-serif;
 }
 
-img {
+/* img {
   border-style: none;
   width: 20px;
-}
+} */
 
-.profiles-box {
+/* .profiles-box {
   display: flex;
   flex-direction: row wrap;
   width: 100%;
@@ -32,7 +32,6 @@ img {
   justify-content: center;
   align-items: center;
   /* border: 1px solid rgb(150, 148, 148); */
-}
 
 * {
   box-sizing: border-box;
@@ -220,20 +219,20 @@ h2 {
 }
 
 .card {
-  color: black;
-  background: #fff;
-  border: solid 5px #063648;
-  border-radius: 40px;
-  background-size: cover;
-  position: absolute;
-  height: 90vh;
-  width: 85vw;
-  margin: 0 auto;
-  transition: box-shadow 0.3s;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
-  cursor: pointer;
-  overflow: hidden;
-  z-index: 5;
+  color: black !important;
+  background: #fff !important;
+  border: solid 5px #063648 !important;
+  border-radius: 40px !important;
+  background-size: cover !important;
+  position: absolute !important;
+  height: 90vh !important;
+  width: 85vw !important;
+  margin: 0 auto !important;
+  transition: box-shadow 0.3s !important;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23) !important;
+  cursor: pointer !important;
+  overflow: hidden !important;
+  z-index: 5 !important;
 }
 
 .animate {
@@ -1035,7 +1034,7 @@ h2 {
   font-weight: 500;
 }
 
-.master-root {
+/* .master-root {
   margin: 20px auto;
   position: relative;
   min-height: 300px;
@@ -1043,9 +1042,9 @@ h2 {
   width: 300px;
   overflow: hidden;
   border: 1px solid #e5e5e5;
-}
+} */
 
-.card {
+/* .card {
   background-color: white;
   background-size: cover;
   position: absolute;
@@ -1056,7 +1055,7 @@ h2 {
   transition: box-shadow 0.3s;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   cursor: pointer;
-}
+} */
 
 .animate {
   transition: transform 0.3s;
