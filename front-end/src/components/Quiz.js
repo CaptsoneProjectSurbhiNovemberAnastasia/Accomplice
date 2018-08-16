@@ -9,6 +9,7 @@ class Quiz extends Component {
     this.state = {
       i: 0,
       answer: 0,
+      values: [-33,-15,0,15,33],
       extraversionValue: 0,
       emotionalStabilityValue: 0,
       agreeablenessValue: 0,
@@ -50,7 +51,7 @@ class Quiz extends Component {
       (questions.length === 0) ? null :
       <div>
         Personality Quiz
-        <RadioForm answer={this.state.answer} question ={questions[this.state.i]} handleChange={this.handleChange} handleSubmit={handleSubmit} handleClick={this.handleClick}/>
+        <RadioForm values={this.state.values}answer={this.state.answer} question ={questions[this.state.i]} handleChange={this.handleChange} handleSubmit={handleSubmit} handleClick={this.handleClick}/>
       </div>
     )
   }

@@ -1,16 +1,17 @@
 import React from 'react'
 
 const RadioForm = (props) => {
-  const { question, handleSubmit, handleChange, handleClick, answer} = props
+  const { values, question, handleSubmit, handleChange, handleClick, answer} = props
 
   return (
     <form >
       <div>{question.question}</div><br/>
-      <input type='radio' value={-33}  onChange={handleChange} checked={+answer === -33}/><label>Disagree</label><br/>
-      <input type='radio' value={-15} onChange={handleChange} checked={+answer===-15} /><br/>
-      <input type='radio' value={0}  onChange={handleChange} checked={+answer === 0}/><label>Neutral</label><br/>
-      <input type='radio' value={15} checked={+answer === 15} onChange={handleChange}/><br/>
-      <input type='radio' value={33} checked={+answer === 33} onChange={handleChange}/><label>Agree</label><br/>
+      {
+        values.map(value =>
+          <input type='radio' key={value} value={value}  onChange={handleChange} checked={+answer === value}/>
+        )
+      }
+      <div>Disagree Neutral Agree</div>
       {
         (question.id === 15) ?
         <button type='submit' onClick={handleClick} onSubmit={handleSubmit}>Submit</button> :
