@@ -9,7 +9,7 @@ import InputQuestion from './components/inputQuestion'
 import { me } from './store'
 import AllMatches from './components/AllMatches'
 import Chat from './components/Chat'
-import { fetchMatches } from './store'
+import { fetchMatches, fetchTags } from './store'
 import UserProfile from './components/UserProfile'
 import Undecided from './components/Undecided'
 
@@ -53,6 +53,7 @@ const mapDispatch = dispatch => {
     loadInitialData(id) {
       dispatch(me())
       dispatch(fetchMatches(id))
+      dispatch(fetchTags())
     },
   }
 }
