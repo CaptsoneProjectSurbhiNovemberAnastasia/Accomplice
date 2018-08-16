@@ -20,6 +20,11 @@ class InputQuestion extends Component {
           <div className="group">
             <NavLink to={`/user/${user.id}/suggestedmatches`}>GO</NavLink>
           </div>
+          <div>
+            <label htmlFor="question">
+              <NavLink to="/undecided">Don't know... get a clue!!</NavLink>
+            </label>
+          </div>
         </form>
       </div>
     )

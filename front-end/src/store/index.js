@@ -6,6 +6,7 @@ import suggestedMatches from './suggestedMatches'
 import user from './user'
 import currentLocation from './currentLocation'
 import form from './form'
+import tags from './tags'
 import matches from './matches'
 
 const reducer = combineReducers({
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   suggestedMatches,
   form,
   matches,
+  tags
 })
 
 // Use for production
@@ -21,7 +23,7 @@ const middleware = composeWithDevTools(
   applyMiddleware(
     thunkMiddleware,
     createLogger({
-      collapsed: true,
+      collapsed: true
     })
   )
 )
@@ -33,5 +35,6 @@ export * from './suggestedMatches'
 export * from './currentLocation'
 export * from './form'
 export * from './matches'
+export * from './tags'
 
 export default store
