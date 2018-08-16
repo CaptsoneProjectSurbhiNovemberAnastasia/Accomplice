@@ -9,7 +9,6 @@ class Quiz extends Component {
     this.state = {
       i: 0,
       answer: 0,
-      checked: false,
       extraversionValue: 0,
       emotionalStabilityValue: 0,
       agreeablenessValue: 0,
@@ -25,7 +24,6 @@ class Quiz extends Component {
   currentQuestion = () => {
     this.setState({
       i: this.state.i+1,
-      answer: this.state.answer,
       extraversionValue: this.state.extraversionValue,
       emotionalStabilityValue: this.state.emotionalStabilityValue,
       agreeablenessValue: this.state.agreeablenessValue,
@@ -35,11 +33,8 @@ class Quiz extends Component {
   }
 
   handleChange = (evt) => {
-    console.log('ON CHANGE',evt.target.value)
-    console.log('STATE',this.state.answer)
     this.setState({
       answer: evt.target.value,
-      checked: !this.state.checked
     })
   }
 
@@ -55,7 +50,7 @@ class Quiz extends Component {
       (questions.length === 0) ? null :
       <div>
         Personality Quiz
-        <RadioForm checked={this.state.checked} question ={questions[this.state.i]} handleChange={this.handleChange} handleSubmit={handleSubmit} handleClick={this.handleClick}/>
+        <RadioForm answer={this.state.answer} question ={questions[this.state.i]} handleChange={this.handleChange} handleSubmit={handleSubmit} handleClick={this.handleClick}/>
       </div>
     )
   }
