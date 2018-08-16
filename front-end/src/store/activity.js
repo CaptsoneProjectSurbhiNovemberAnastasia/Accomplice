@@ -13,10 +13,11 @@ export const fetchActivity = () => async dispatch => {
   }
 }
 
-export const setActivity = name => async dispatch => {
+export const setActivity = (name, tags) => async dispatch => {
   try {
     const { data } = await axios.post('http://localhost:8080/api/activity', {
       name,
+      tags,
     })
     dispatch(getActivity(data))
   } catch (e) {
