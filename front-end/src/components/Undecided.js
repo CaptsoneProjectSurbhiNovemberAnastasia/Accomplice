@@ -5,7 +5,7 @@ import Select from 'react-select'
 
 class Undecided extends Component {
   state = {
-    selectedOptions: [],
+    selectedOptions: []
   }
 
   handleChange = selectedOptions => {
@@ -18,7 +18,7 @@ class Undecided extends Component {
   componentDidMount() {
     // i can't get the form to populate with previously selected tags, but they stay in the store and db
     this.setState({
-      selectedOptions: this.props.tags.filter(tag => tag.selected),
+      selectedOptions: this.props.tags.filter(tag => tag.selected)
     })
   }
   render() {
@@ -30,7 +30,7 @@ class Undecided extends Component {
       options = tags.map(tag => ({
         value: tag.name.toLowerCase(),
         label: tag.name,
-        id: tag.id,
+        id: tag.id
       }))
     }
     return (
@@ -51,7 +51,7 @@ class Undecided extends Component {
 }
 
 const mapDispatch = dispatch => ({
-  chooseTags: tags => dispatch(setTags(tags)),
+  chooseTags: tags => dispatch(setTags(tags))
 })
 const mapState = state => ({
   tags: state.tags

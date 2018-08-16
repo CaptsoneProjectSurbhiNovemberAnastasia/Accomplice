@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { NavLink } from 'react-router-dom'
+import CurrentLocation from './currentLocation'
 
 class InputQuestion extends Component {
   render() {
@@ -26,6 +27,7 @@ class InputQuestion extends Component {
             </label>
           </div>
         </form>
+        <CurrentLocation />
       </div>
     )
   }
@@ -33,7 +35,7 @@ class InputQuestion extends Component {
 
 const mapState = state => ({
   error: state.user.error,
-  user: state.user,
+  user: state.user
 })
 
 export default withRouter(
