@@ -13,7 +13,7 @@ import Chat from './components/Chat'
 import { fetchMatches } from './store'
 
 import UserProfile from './components/UserProfile'
-
+import Quiz from './components/Quiz'
 
 class Routes extends Component {
   componentDidMount() {
@@ -35,6 +35,7 @@ class Routes extends Component {
               <Route path="/question" component={InputQuestion} />
               <Route exact path="/matches" component={AllMatches} />
               <Route path="/chat/:id" component={Chat} />
+              <Route path="/quiz" component={Quiz} />
               <Route exact path="/profile" component={UserProfile} />
           </Switch>
           )}
