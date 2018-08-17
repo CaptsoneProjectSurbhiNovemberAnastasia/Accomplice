@@ -9,8 +9,7 @@ const getTraitValues = userTraits => ({
 
 export const setTraitValues = (userTraitValues) => async dispatch => {
   try {
-
-    console.log(userTraitValues)
+    console.log('inside thunk', userTraitValues)
     const { data } = await axios.post('http://localhost:8080/api/user/traits', {userTraitValues})
     dispatch(getTraitValues(data))
   } catch (err) {

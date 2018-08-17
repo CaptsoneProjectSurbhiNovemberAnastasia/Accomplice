@@ -57,7 +57,7 @@ class Quiz extends Component {
       }
     }
 
-    this.props.colletTraitValues(finalTraitValues)
+    this.props.collectTraitValues(finalTraitValues)
   }
 
 
@@ -80,7 +80,7 @@ class Quiz extends Component {
 
 const mapDispatch = dispatch => ({
   loadQuestions: () => dispatch(fetchQuestions()),
-  colletTraitValues: (traitValues) => {
+  collectTraitValues: (traitValues) => {
     dispatch(setTraitValues(traitValues))
   }
 })
