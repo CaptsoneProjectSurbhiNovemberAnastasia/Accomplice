@@ -8,7 +8,9 @@ import currentLocation from './currentLocation'
 import form from './form'
 import tags from './tags'
 import matches from './matches'
+import questions from './question'
 import activity from './activity'
+import userTraitValues from './userTraits'
 
 const reducer = combineReducers({
   user,
@@ -16,8 +18,10 @@ const reducer = combineReducers({
   suggestedMatches,
   form,
   matches,
+  questions,
   tags,
   activity,
+  userTraitValues
 })
 
 // Use for production
@@ -37,7 +41,9 @@ export * from './suggestedMatches'
 export * from './currentLocation'
 export * from './form'
 export * from './matches'
+export * from './question'
 export * from './tags'
 export * from './activity'
+export * from './userTraits'
 
 export default store
