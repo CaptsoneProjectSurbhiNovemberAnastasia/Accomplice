@@ -41,7 +41,6 @@ class InputQuestion extends Component {
         key: tag.id,
       }))
     }
-
     return (
       <div>
         <form onSubmit={this.handleSubmit}>

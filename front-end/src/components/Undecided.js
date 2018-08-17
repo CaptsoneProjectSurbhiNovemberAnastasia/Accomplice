@@ -16,25 +16,30 @@ class Undecided extends Component {
     this.props.chooseTags(this.state.selectedOptions)
   }
   componentDidMount() {
-    // i can't get the form to populate with previously selected tags, but they stay in the store and db
     console.log(this.props.tags)
     this.setState({
-      selectedOptions: this.props.tags.filter(tag => tag.selected),
+      selectedOptions: this.props.tags
+        .filter(tag => tag.selected)
+        .map(tag => this.mapTagToSelectElement(tag)),
     })
   }
+
+  mapTagToSelectElement = tag => ({
+    value: tag.name.toLowerCase(),
+    label: tag.name,
+    id: tag.id,
+    key: tag.id,
+  })
+
   render() {
     const { tags } = this.props
-    const { selectedOptions } = this.state
+    let { selectedOptions } = this.state
     let options
 
     if (tags) {
-      options = tags.map(tag => ({
-        value: tag.name.toLowerCase(),
-        label: tag.name,
-        id: tag.id,
-        key: tag.id,
-      }))
+      options = tags.map(tag => this.mapTagToSelectElement(tag))
     }
+    console.log(selectedOptions)
     return (
       <div>
         <div>What kind of things are you interested in?</div>

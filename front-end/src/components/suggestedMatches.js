@@ -20,12 +20,16 @@ class SuggestedMatches extends Component {
   }
 
   filterSuggestedMatches = (matches, user) => {
+    console.log(matches)
     if (user.activityId) {
       const yourActivityTagIds = user.activity.tags.map(tag => tag.id)
       return matches.filter(
         match =>
-          match.activityId === user.activityId ||
-          match.activity.tags.some(tag => yourActivityTagIds.includes(tag.id))
+          match.activityId &&
+          (match.activityId === user.activityId ||
+            match.activity.tags.some(tag =>
+              yourActivityTagIds.includes(tag.id)
+            ))
       )
     } else if (this.props.tags.some(tag => tag.selected)) {
       const selectedTagIds = this.props.tags
