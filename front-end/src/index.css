@@ -202,37 +202,19 @@ h2 {
   height: 100vh;
 }
 
-#card-stack {
-  z-index: 1;
+.card {
+  color: black;
+  background: #d3d3d3;
+  border-radius: 10px;
+  background-size: cover;
   position: absolute;
-  background: #fff;
-  border: 1px solid #ccc;
-  color: #555;
-  border-radius: 40px;
-  margin: 23px auto;
   height: 90vh;
   width: 85vw;
-  box-shadow: inset 0 -6px 0 0 #9d9d9d, inset 0 -8px 0 0 #747474,
-    inset 0 -14px 0 0 #c1c1c1, inset 0 -15px 0 0 #7b7a7a,
-    0 4px 10px -4px rgba(0, 0, 0, 0.8);
-  padding: 1em 1em 1.5em 1em;
-}
-
-.card {
-  color: black !important;
-  background: #fff !important;
-  border: solid 5px #063648 !important;
-  border-radius: 40px !important;
-  background-size: cover !important;
-  position: absolute !important;
-  height: 90vh !important;
-  width: 85vw !important;
-  margin: 0 auto !important;
-  transition: box-shadow 0.3s !important;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23) !important;
-  cursor: pointer !important;
-  overflow: hidden !important;
-  z-index: 5 !important;
+  margin: 0 auto;
+  transition: box-shadow 0.3s;
+  cursor: pointer;
+  overflow: hidden;
+  z-index: 5;
 }
 
 .animate {
