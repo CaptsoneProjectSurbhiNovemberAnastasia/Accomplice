@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Cards, { Card } from 'react-swipe-card'
-import { fetchSuggestedMatches } from '../store'
+import { fetchSuggestedMatches, matchWith } from '../store'
 import UserCard from './UserCard'
 
 const CustomAlertLeft = () => (
@@ -50,8 +50,9 @@ class SuggestedMatches extends Component {
       currentUser,
       onReject,
       onLove,
-      loadMatches,
       match,
+      loadMatches,
+      matchWithUser,
     } = this.props
 
     if (!Array.isArray(suggestedMatches) && !suggestedMatches) {
@@ -68,28 +69,30 @@ class SuggestedMatches extends Component {
       )
       return (
         <div className="container">
-          <div id="card-stack" />
+          <div />
           <Cards
             alertRight={<CustomAlertRight />}
             alertLeft={<CustomAlertLeft />}
-            onEnd={() => loadMatches(currentUser)}
+            onEnd={() => loadMatches()}
             className="master-root"
           >
-            {!filteredSuggestedMatches
-              ? null
-              : filteredSuggestedMatches.map(user => (
-                  <Card
-                    key="{user.id}"
-                    onSwipeLeft={() => {
-                      onReject(user.id, currentUser.id, match.params.type)
-                    }}
-                    onSwipeRight={() => {
-                      onLove(user.id, currentUser.id, match.params.type)
-                    }}
-                  >
-                    <UserCard key={user.id} user={user} />
-                  </Card>
-                ))}
+            {!filteredSuggestedMatches ? (
+              <div>Nobody yet!</div>
+            ) : (
+              filteredSuggestedMatches.map(user => (
+                <Card
+                  key={user.id}
+                  onSwipeLeft={() => {
+                    onReject(user.id, currentUser.id, match.params.type)
+                  }}
+                  onSwipeRight={() => {
+                    matchWithUser(user.id)
+                  }}
+                >
+                  <UserCard key={user.id} user={user} />
+                </Card>
+              ))
+            )}
           </Cards>
         </div>
       )
@@ -110,14 +113,9 @@ const mapDispatch = (dispatch, ownProps) => ({
     const userId = +ownProps.match.params.id
     await dispatch(fetchSuggestedMatches(userId))
   },
-  // async onLoad(user) {
-  //   for (let i = 0; i < 25; i++) {
-  //     await dispatch(fetchUsers(ownProps.match.params.type, user))
-  //   }
-  // },
-  // loadMatches(id) {
-  //   // dispatch(fetchMatches(id))
-  // },
+
+  matchWithUser: id => dispatch(matchWith(id)),
+
   onReject(userId, currentUserId) {
     // dispatch(rejectUser(userId, currentUserId))
   },
