@@ -50,6 +50,11 @@ class Quiz extends Component {
       } else {
         finalTraitValues[j]= finalTraitValues[j] + this.state.answersArray[i]
       }
+      for (let j = 0; j < 5; j++) {
+        if (finalTraitValues[j] < 0) {
+          finalTraitValues[j] = 0
+        }
+      }
     }
 
     this.props.colletTraitValues(finalTraitValues)
