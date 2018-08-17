@@ -9,7 +9,7 @@ import CurrentLocation from './currentLocation'
 class InputQuestion extends Component {
   state = {
     selectedOptions: [],
-    activity: '',
+    activity: ''
   }
 
   handleSubmit = evt => {
@@ -21,7 +21,7 @@ class InputQuestion extends Component {
     if (selectedOptions.target) {
       // it is an event
       this.setState({
-        [selectedOptions.target.name]: selectedOptions.target.value,
+        [selectedOptions.target.name]: selectedOptions.target.value
       })
     } else {
       // it is the options array from react-select
@@ -38,7 +38,7 @@ class InputQuestion extends Component {
         value: tag.name.toLowerCase(),
         label: tag.name,
         id: tag.id,
-        key: tag.id,
+        key: tag.id
       }))
     }
 
@@ -55,10 +55,13 @@ class InputQuestion extends Component {
               placeholder="e.g. Go on a hike"
               onChange={this.handleChange}
             />
-            <label htmlFor="question">
-              <div> Tag your activity so others can find you! </div>
+          </div>
+          <div className="group row ml-5">
+            <label htmlFor="question col-6">
+              <div> Tag your activity so others can find you! :)</div>
             </label>
             <Select
+              className="col-5"
               value={this.selectedOptions}
               onChange={this.handleChange}
               options={options}
@@ -86,12 +89,12 @@ class InputQuestion extends Component {
 
 const mapState = state => ({
   user: state.user,
-  tags: state.tags,
+  tags: state.tags
 })
 const mapDispatch = dispatch => ({
   chooseActivity: (activity, tags) => {
     dispatch(setActivity(activity, tags))
-  },
+  }
 })
 
 export default withRouter(
