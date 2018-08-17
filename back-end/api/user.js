@@ -3,15 +3,22 @@ const { SuggestedMatchesPerUser, User, Trait } = require('../db/models')
 
 module.exports = router
 
-//GET /api/user/:id single user
-router.get('/:id', async (req, res, next) => {
+router.use(async (req, res, next) => {
   try {
-    // if (req.user.id === req.params.id) {
-    const user = await User.findById(req.params.id)
-    res.json(user).status(200)
-    // } else {
-    //   res.send('FORBIDDEN').status(403)
-    // }
+    const you = await User.findById(req.user.id)
+    const yourActivity = await you.getActivity()
+    const yourActivityTags = await yourActivity.getTags()
+    yourActivity.dataValues.tags = yourActivityTags
+    req.user.activity = yourActivity
+    next()
+  } catch (e) {
+    next(e)
+  }
+})
+//GET /api/user/:id single user
+router.get('/:id', (req, res, next) => {
+  try {
+    res.json(req.user)
   } catch (err) {
     next(err)
   }
@@ -71,6 +78,17 @@ router.get('/:id/suggestedmatches', async (req, res, next) => {
           (ele, i) => keys.indexOf(ele.id) === i
         )
 
+        // now we need each user's activity and its tags
+        for (let i = 0; i < possibleMatches.length; i++) {
+          if (possibleMatches[i].activityId) {
+            const theirActivity = await possibleMatches[i].getActivity()
+            const theirActivityTags = await theirActivity.getTags()
+            // just put the activity and tags on there so we can look at it on the front end
+            theirActivity.dataValues.tags = theirActivityTags
+            possibleMatches[i].dataValues.activity = theirActivity
+          }
+        }
+
         res.json(possibleMatches).status(200)
       } else {
         res.send('No matches found')
@@ -89,8 +107,10 @@ router.post('/traits', async (req, res, next) => {
     const traits = await Trait.findAll()
     const you = await User.findById(req.user.id)
 
-    for (let i = 0 ; i <= 5; i++) {
-      await you.addTrait(traits[i], { through: {value: req.body.userTraitValues[i]}})
+    for (let i = 0; i <= 5; i++) {
+      await you.addTrait(traits[i], {
+        through: { value: req.body.userTraitValues[i] },
+      })
     }
 
     const yourTraits = await you.getTraits()
@@ -100,4 +120,3 @@ router.post('/traits', async (req, res, next) => {
     next(err)
   }
 })
-

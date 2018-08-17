@@ -9,7 +9,21 @@ class UserCard extends Component {
   }
   render() {
     const { user } = this.props
-    // console.log('User is', user)
+    let activityTags = []
+    if (user.activityId) {
+      const tagNames = user.activity.tags.map(tag => tag.name)
+
+      if (user.activity.tags.length > 1) {
+        let lastTag = tagNames[tagNames.length - 1]
+        lastTag = 'and ' + lastTag
+        activityTags = tagNames
+          .slice(0, -1)
+          .concat([lastTag])
+          .join(', ')
+      } else {
+        activityTags = tagNames
+      }
+    }
     return (
       <div id="userCard" className="collapsed">
         <div>
@@ -19,7 +33,14 @@ class UserCard extends Component {
           <li>
             <h4>{user.firstName + ' ' + user.lastName}</h4>
             <p>{user.description}</p>
-
+            <p>
+              {user.firstName}{' '}
+              {user.activityId
+                ? `wants to ${
+                    user.activity.name
+                  }. This activity is ${activityTags}.`
+                : `doesn't know what they want to do.`}
+            </p>
             <button onClick={this.handleClick}>Match!</button>
           </li>
         </div>
@@ -29,7 +50,7 @@ class UserCard extends Component {
 }
 
 const mapDispatch = dispatch => ({
-  matchWithUser: id => dispatch(matchWith(id))
+  matchWithUser: id => dispatch(matchWith(id)),
 })
 export default connect(
   null,

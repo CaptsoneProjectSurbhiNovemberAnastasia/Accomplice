@@ -19,6 +19,31 @@ class SuggestedMatches extends Component {
     this.props.loadMatches()
   }
 
+  filterSuggestedMatches = (matches, user) => {
+    if (user.activityId) {
+      const yourActivityTagIds = user.activity.tags.map(tag => tag.id)
+      return matches.filter(
+        match =>
+          match.activityId &&
+          (match.activityId === user.activityId ||
+            match.activity.tags.some(tag =>
+              yourActivityTagIds.includes(tag.id)
+            ))
+      )
+    } else if (this.props.tags.some(tag => tag.selected)) {
+      const selectedTagIds = this.props.tags
+        .filter(tag => tag.selected)
+        .map(tag => tag.id)
+      return matches.filter(
+        match =>
+          match.activityId &&
+          match.activity.tags.some(tag => selectedTagIds.includes(tag.id))
+      )
+    } else {
+      return matches
+    }
+  }
+
   render() {
     const {
       suggestedMatches,
@@ -26,9 +51,9 @@ class SuggestedMatches extends Component {
       onReject,
       onLove,
       loadMatches,
-      match
+      match,
     } = this.props
-    // const { suggestedMatches } = this.props
+
     if (!Array.isArray(suggestedMatches) && !suggestedMatches) {
       return <div>You're not allowed to view this page.</div>
     } else if (
@@ -37,6 +62,10 @@ class SuggestedMatches extends Component {
     ) {
       return <div>No matches found.</div>
     } else {
+      const filteredSuggestedMatches = this.filterSuggestedMatches(
+        suggestedMatches,
+        currentUser
+      )
       return (
         <div className="container">
           <div id="card-stack" />
@@ -46,9 +75,9 @@ class SuggestedMatches extends Component {
             onEnd={() => loadMatches(currentUser)}
             className="master-root"
           >
-            {!suggestedMatches
+            {!filteredSuggestedMatches
               ? null
-              : suggestedMatches.map(user => (
+              : filteredSuggestedMatches.map(user => (
                   <Card
                     key="{user.id}"
                     onSwipeLeft={() => {
@@ -71,7 +100,8 @@ class SuggestedMatches extends Component {
 const mapState = state => {
   return {
     suggestedMatches: state.suggestedMatches,
-    currentUser: state.user
+    currentUser: state.user,
+    tags: state.tags,
   }
 }
 
@@ -93,7 +123,7 @@ const mapDispatch = (dispatch, ownProps) => ({
   },
   onLove(userId, currentUserId) {
     // dispatch(addMatches(userId, currentUserId))
-  }
+  },
 })
 
 export default connect(
