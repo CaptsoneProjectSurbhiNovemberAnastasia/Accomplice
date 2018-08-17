@@ -40,7 +40,7 @@ class Quiz extends Component {
 
   handleSubmit = (evt) => {
     evt.preventDefault()
-    console.log(this.state)
+
     let finalTraitValues = new Array(5).fill(0)
     let j = 0
     for (let i = 0; i < 15; i ++) {
@@ -51,7 +51,7 @@ class Quiz extends Component {
         finalTraitValues[j]= finalTraitValues[j] + this.state.answersArray[i]
       }
     }
-    console.log(finalTraitValues)
+
     this.props.colletTraitValues(finalTraitValues)
   }
 
@@ -75,8 +75,8 @@ class Quiz extends Component {
 
 const mapDispatch = dispatch => ({
   loadQuestions: () => dispatch(fetchQuestions()),
-  colletTraitValues: (traits) => {
-    dispatch(setTraitValues(traits))
+  colletTraitValues: (traitValues) => {
+    dispatch(setTraitValues(traitValues))
   }
 })
 

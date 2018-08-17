@@ -2,24 +2,24 @@ import axios from 'axios'
 
 const GET_USER_TRAITS = 'GET_USER_TRAITS'
 
-const getTraitValues = values => ({
+const getTraitValues = userTraits => ({
   type: GET_USER_TRAITS,
   userTraits
 })
 
-export const setTraitValues = (traits) => async dispatch => {
+export const setTraitValues = (userTraitValues) => async dispatch => {
   try {
 
-    const { data } = await axios.post('http://localhost:8080/api/user/traits', {})
-    // dispatch(getTraitValues(data))
-  } catch (e) {
-    console.error(e)
+    console.log(userTraitValues)
+    const { data } = await axios.post('http://localhost:8080/api/user/traits', {userTraitValues})
+    dispatch(getTraitValues(data))
+  } catch (err) {
+    console.error(err)
   }
 }
 
 
 let initialState = []
-
 const userTraits = (state = initialState, action) => {
   switch (action.type) {
     case GET_USER_TRAITS: {

@@ -10,7 +10,7 @@ import tags from './tags'
 import matches from './matches'
 import questions from './question'
 import activity from './activity'
-import userTraits from './userTraits'
+import userTraitValues from './userTraits'
 
 const reducer = combineReducers({
   user,
@@ -21,7 +21,7 @@ const reducer = combineReducers({
   questions,
   tags,
   activity,
-  userTraits
+  userTraitValues
 })
 
 // Use for production
