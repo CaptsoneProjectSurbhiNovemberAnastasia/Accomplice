@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import RadioForm from './RadioForm'
 import { connect } from 'react-redux'
 import { fetchQuestions } from '../store'
+import { setTraitValues } from '../store'
 
 class Quiz extends Component {
   constructor() {
@@ -9,12 +10,8 @@ class Quiz extends Component {
     this.state = {
       i: 0,
       answer: 0,
-      values: [-33,-15,0,15,33],
-      extraversionValue: 0,
-      emotionalStabilityValue: 0,
-      agreeablenessValue: 0,
-      conscientiousnessValue: 0,
-      intellectImaginationValue: 0
+      answersArray: [],
+      values: [-33,-15,0,15,33]
     }
   }
 
@@ -22,14 +19,10 @@ class Quiz extends Component {
     this.props.loadQuestions()
   }
 
-  currentQuestion = () => {
-    this.setState({
+  currentQuestion = async () => {
+    await this.setState({
       i: this.state.i+1,
-      extraversionValue: this.state.extraversionValue,
-      emotionalStabilityValue: this.state.emotionalStabilityValue,
-      agreeablenessValue: this.state.agreeablenessValue,
-      conscientiousnessValue: this.state.conscientiousnessValue,
-      intellectImaginationValue: this.state.intellectImaginationValue
+      answersArray: [...this.state.answersArray, +this.state.answer]
     })
   }
 
@@ -41,19 +34,40 @@ class Quiz extends Component {
 
   handleClick = (evt, id) => {
     evt.preventDefault()
-    console.log(id)
     this.currentQuestion()
   }
 
 
+  handleSubmit = (evt) => {
+    evt.preventDefault()
+    console.log(this.state)
+    let finalTraitValues = new Array(5).fill(0)
+    let j = 0
+    for (let i = 0; i < 15; i ++) {
+      if (i%3 === 0 && i !== 0) {
+        j++
+        finalTraitValues[j]= finalTraitValues[j] + this.state.answersArray[i]
+      } else {
+        finalTraitValues[j]= finalTraitValues[j] + this.state.answersArray[i]
+      }
+    }
+    console.log(finalTraitValues)
+    this.props.colletTraitValues(finalTraitValues)
+  }
+
+
   render() {
-    const {questions, handleSubmit} = this.props
+    const {questions, user} = this.props
 
     return (
       (questions.length === 0) ? null :
       <div>
-        Personality Quiz
-        <RadioForm values={this.state.values}answer={this.state.answer} question ={questions[this.state.i]} handleChange={this.handleChange} handleSubmit={handleSubmit} handleClick={this.handleClick}/>
+        <h3>Personality Quiz</h3>
+        {(this.state.i > 14) ?
+        <div><form onSubmit={this.handleSubmit}>All done, please submit your answers!<br/>
+          <button type="submit" onSubmit={this.handleSubmit}>Submit</button></form></div> :
+          <RadioForm values={this.state.values} answer={this.state.answer} question={questions[this.state.i]} handleChange={this.handleChange} handleClick={this.handleClick}/>
+        }
       </div>
     )
   }
@@ -61,20 +75,14 @@ class Quiz extends Component {
 
 const mapDispatch = dispatch => ({
   loadQuestions: () => dispatch(fetchQuestions()),
-  handleSubmit (evt, id) {
-    evt.preventDefault()
-    console.log(id)
-    //dispatch final values to the store to update user_trait values
+  colletTraitValues: (traits) => {
+    dispatch(setTraitValues(traits))
   }
 })
 
 const mapState = state => ({
   questions: state.questions,
-  extraversionValue: state.extraversionValue,
-  emotionalStabilityValue: state.emotionalStabilityValue,
-  agreeablenessValue: state.agreeablenessValue,
-  conscientiousnessValue: state.conscientiousnessValue,
-  intellectImaginationValue: state.intellectImaginationValue
+  answersArray: state.answersArray
 })
 
 
