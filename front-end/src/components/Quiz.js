@@ -62,7 +62,7 @@ class Quiz extends Component {
 
 
   render() {
-    const {questions, user} = this.props
+    const {questions} = this.props
 
     return (
       (questions.length === 0) ? null :

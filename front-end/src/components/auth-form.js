@@ -57,6 +57,7 @@ const AuthForm = props => {
                 >
                   Log In
                 </button>
+                <div className="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
               </div>
             </form>
             {/*login form with google*/}
@@ -103,6 +104,7 @@ const AuthForm = props => {
                 >
                   Sign Up
                 </button>
+                <div className="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="continue_with" data-show-faces="false" data-auto-logout-link="false" data-use-continue-as="false"></div>
               </div>
               {/* error && error.response && <div> {error.response.data} </div> */}
               {/* <div className="social-container">
