@@ -58,11 +58,11 @@ const UserProfileForm = props => {
               defaultValue={user.description}
             />
           </div>
-          <div className="form-button m-1">
-            <button className="mr-2" type="submit">
+          <div className="form-button row btnInline ">
+            <button className="btnWidth" type="submit">
               Save Changes
             </button>
-            <button type="button" onClick={handleClick}>
+            <button className="btnWidth" type="button" onClick={handleClick}>
               Logout
             </button>
           </div>

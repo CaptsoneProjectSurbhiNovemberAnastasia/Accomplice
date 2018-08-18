@@ -1,9 +1,4 @@
-/* body {
-  margin: 0;
-  padding: 0;
-  font-family: sans-serif;
-}
-
+/*
 .navbar {
   margin-bottom: 15px;
   background-color: rgb(63, 75, 252);
@@ -66,7 +61,7 @@ li {
 }
 
 h1 {
-  font-family: 'Just Another Hand';
+  font-family: 'sans-serif';
   font-size: 70px;
   margin: 20px;
 }
@@ -103,7 +98,26 @@ h2 {
 #userCard #picContainer {
   width: 100vw;
 }
-
+.bg-color {
+  background-color: rgb(13, 89, 212) !important;
+}
+.flexwrap {
+  flex-wrap: nowrap !important;
+}
+.fa-user {
+  float: left;
+  -webkit-font-smoothing: none !important;
+}
+.fa-comment {
+  float: right;
+  -webkit-font-smoothing: none !important;
+}
+.row {
+  margin: 15px !important;
+}
+.goBtn {
+  background-color: rgb(13, 89, 212) !important;
+}
 @media screen and (max-width: 600px) {
   .expanded h2,
   .expanded h3,
@@ -270,14 +284,15 @@ h2 {
 .geoLoc {
   border-radius: 15px;
   cursor: pointer;
-  background: #0e6463;
-  width: 25%;
+  background: rgb(13, 89, 212);
+  width: 60%;
   padding: 10px 15px;
   color: #fff;
-  font-family: 'Roboto';
-  font-size: 12px;
+  font-family: 'sans-serif';
+  font-size: 15px;
   font-weight: 400;
   transition: all 0.5s ease;
+  margin-top: 10px;
 }
 .geoLoc:hover {
   opacity: 0.8;
@@ -325,7 +340,7 @@ h2 {
 }
 
 .userTypesText {
-  font-family: 'Just Another Hand';
+  font-family: 'sans-serif';
   position: absolute;
   left: -35px;
   bottom: -5px;
@@ -335,7 +350,9 @@ h2 {
   text-decoration: none;
   color: #041733;
 }
-
+#questionForm {
+  margin: 50px;
+}
 .menu {
   z-index: 9999999;
   margin: auto;
@@ -535,10 +552,9 @@ h2 {
 .splash,
 .splash::before {
   text-align: left;
-  background: linear-gradient(rgba(14, 100, 99, 0.8), rgba(14, 100, 99, 0.8)),
-    url('./styles/Three-Ball-Soccer1.jpg') no-repeat center center fixed;
+  background: linear-gradient(white, white), no-repeat center center fixed;
   background-size: cover;
-  font-family: 'Roboto';
+  font-family: 'sans-serif';
   display: flex;
   align-items: center;
   justify-content: center;
@@ -552,10 +568,9 @@ h2 {
 .form {
   border-radius: 30px;
   position: absolute;
-  background: rgba(255, 243, 229, 0.8);
+  background: white;
   width: calc(285px + 10vw);
   padding: 40px;
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 .form .img-container {
   display: flex;
@@ -586,8 +601,7 @@ h2 {
   margin: 0 0 20px;
   padding: 10px 15px;
   border: 1px solid #ccc;
-  color: #ccc;
-  font-family: 'Roboto';
+  font-family: 'sans-serif';
   font-size: 14px;
   font-weight: 400;
   transition: 0.2s linear;
@@ -599,14 +613,28 @@ h2 {
 .form div button {
   border-radius: 15px;
   cursor: pointer;
-  background: #0e6463;
+  background: rgb(13, 89, 212);
   width: 100%;
   padding: 10px 15px;
   color: #fff;
-  font-family: 'Roboto';
+  font-family: 'sans-serif';
   font-size: 16px;
   font-weight: 400;
   transition: all 0.5s ease;
+}
+.nopadding {
+  padding-top: 0px;
+}
+.btnInline {
+  margin-top: 25px !important;
+  margin-bottom: 15px !important;
+
+  margin-right: -15px !important;
+  flex-wrap: nowrap;
+  align-content: center;
+}
+.btnWidth {
+  width: auto !important;
 }
 .form div button:hover {
   opacity: 0.8;
@@ -626,7 +654,7 @@ h2 {
   padding: 6px;
 }
 .form .checkboxes div label {
-  font-family: 'Just Another Hand';
+  font-family: 'sans-serif';
   font-size: calc(22px + 1.5vw);
 }
 .form textarea {
@@ -704,7 +732,7 @@ h2 {
 .login-html .sign-in:checked + .tab,
 .login-html .sign-up:checked + .tab {
   color: black;
-  border-color: #0e6463;
+  border-color: rgb(13, 89, 212);
 }
 
 .login-html
@@ -758,19 +786,21 @@ input[type='checkbox']:checked {
   color: white;
 }
 .matchesList .userCard h1 {
-  font-family: 'Just Another Hand';
+  font-family: 'sans-serif';
   font-size: 42px;
   margin: 8px 0 8px 0;
 }
 .matchesList .userCard h2 {
   font-size: 16px;
-  font-family: 'Roboto';
+  font-family: 'sans-serif';
   line-height: 0;
 }
 .matchesList .userCard:hover {
   box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
-
+.profile_box {
+  align-items: center;
+}
 @media screen and (max-width: 600px) {
   .userCard {
     width: 90%;
@@ -867,7 +897,7 @@ input[type='checkbox']:checked {
 }
 .userProfile h4 {
   text-align: left;
-  font-family: 'Just Another Hand';
+  font-family: 'sans-serif';
   font-size: 36px;
   margin: 15px 0 4px 0;
   line-height: 36px;
@@ -880,7 +910,7 @@ input[type='checkbox']:checked {
   max-width: 600px;
   margin: auto;
   text-align: right;
-  font-family: 'Roboto';
+  font-family: 'sans-serif';
   font-size: 22px;
 }
 .userProfile .userButtons button {
@@ -893,7 +923,7 @@ input[type='checkbox']:checked {
   margin: 2em 1em 2em 1em;
   padding: 12px 15px;
   color: #fff;
-  font-family: 'Roboto';
+  font-family: 'sans-serif';
   font-size: 18px;
   font-weight: 400;
   transition: all 0.5s ease;
@@ -946,7 +976,7 @@ input[type='checkbox']:checked {
 }
 
 .email-signature {
-  font-family: 'Just Another Hand';
+  font-family: 'sans-serif';
   font-size: 38px;
 }
 
@@ -973,13 +1003,13 @@ input[type='checkbox']:checked {
 
 .email-greeting {
   color: #0e6463;
-  font-family: 'Just Another Hand';
+  font-family: 'sans-serif';
   font-size: 40px;
 }
 
 h5 {
   margin: 3px;
-  font-family: 'Just Another Hand';
+  font-family: 'sans-serif';
   font-size: 30px;
 }
 

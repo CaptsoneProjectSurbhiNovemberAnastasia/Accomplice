@@ -4,6 +4,7 @@ import { withRouter } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import { setActivity } from '../store'
 import Select from 'react-select'
+import { Input } from 'react-input-component'
 import CurrentLocation from './currentLocation'
 
 class InputQuestion extends Component {
@@ -42,10 +43,10 @@ class InputQuestion extends Component {
       }))
     }
     return (
-      <div>
+      <div id="questionForm">
         <form onSubmit={this.handleSubmit}>
-          <div className="group">
-            <label htmlFor="activity">
+          <div className="group row ">
+            <label htmlFor="activity col-6">
               <div>What would you like to do today?</div>
             </label>
             <input
@@ -55,27 +56,29 @@ class InputQuestion extends Component {
               onChange={this.handleChange}
             />
           </div>
-          <div className="group row ml-5">
+          <div className="group row">
             <label htmlFor="question col-6">
-              <div> Tag your activity so others can find you! :)</div>
+              <div> Tag your activity so others can find you!</div>
             </label>
             <Select
-              className="col-5"
+              className="col-8"
               value={this.selectedOptions}
               onChange={this.handleChange}
               options={options}
               isMulti
             />
-            <button type="submit">GO</button>
+            <button type="submit" className="goBtn">
+              GO
+            </button>
           </div>
         </form>
-        <div className="group">
+        <div className="group row">
           <NavLink to={`/user/${user.id}/suggestedmatches`}>
             See people to match with!
           </NavLink>
         </div>
 
-        <div>
+        <div className="group row">
           <label htmlFor="question">
             <NavLink to="/undecided">Don't know... get a clue!</NavLink>
           </label>

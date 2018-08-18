@@ -20,8 +20,9 @@ class SuggestedMatches extends Component {
   }
 
   filterSuggestedMatches = (matches, user) => {
-    if (user.activityId) {
+    if (user.activity) {
       const yourActivityTagIds = user.activity.tags.map(tag => tag.id)
+      console.log('inside if ')
       return matches.filter(
         match =>
           match.activityId &&
@@ -31,6 +32,7 @@ class SuggestedMatches extends Component {
             ))
       )
     } else if (this.props.tags.some(tag => tag.selected)) {
+      console.log('inside elseif ')
       const selectedTagIds = this.props.tags
         .filter(tag => tag.selected)
         .map(tag => tag.id)
@@ -40,6 +42,7 @@ class SuggestedMatches extends Component {
           match.activity.tags.some(tag => selectedTagIds.includes(tag.id))
       )
     } else {
+      console.log('inside else ')
       return matches
     }
   }
