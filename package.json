@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
+    "start": "node server",
     "heroku-postbuild": "cd front-end/ && npm install && npm install --only=dev --no-shrinkwrap && npm run build"
   },
   "repository": {
