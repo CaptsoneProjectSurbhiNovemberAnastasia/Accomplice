@@ -16,7 +16,7 @@ const CustomAlertRight = () => (
 )
 class SuggestedMatches extends Component {
   componentDidMount() {
-    this.props.loadMatches()
+    this.props.loadMatches(this.props.currentUser.id)
   }
 
   filterSuggestedMatches = (matches, user) => {
@@ -49,7 +49,6 @@ class SuggestedMatches extends Component {
       suggestedMatches,
       currentUser,
       onReject,
-      onLove,
       match,
       loadMatches,
       matchWithUser,
@@ -109,18 +108,14 @@ const mapState = state => {
 }
 
 const mapDispatch = (dispatch, ownProps) => ({
-  loadMatches: async () => {
-    const userId = +ownProps.match.params.id
-    await dispatch(fetchSuggestedMatches(userId))
+  loadMatches: async id => {
+    await dispatch(fetchSuggestedMatches(id))
   },
 
   matchWithUser: id => dispatch(matchWith(id)),
 
-  onReject(userId, currentUserId) {
+  onReject: id => {
     // dispatch(rejectUser(userId, currentUserId))
-  },
-  onLove(userId, currentUserId) {
-    // dispatch(addMatches(userId, currentUserId))
   },
 })
 

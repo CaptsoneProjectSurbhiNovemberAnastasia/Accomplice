@@ -6,14 +6,12 @@ import MatchedUsers from './components/matchedUsers'
 import AuthForm from './components/auth-form'
 import SuggestedMatches from './components/suggestedMatches'
 import InputQuestion from './components/inputQuestion'
-import { me } from './store'
 import AllMatches from './components/AllMatches'
 import Chat from './components/Chat'
-import { fetchMatches, fetchTags } from './store'
+import { me, fetchMatches, fetchTags } from './store'
 import UserProfile from './components/UserProfile'
 import Quiz from './components/Quiz'
-import Undecided from './components/Undecided'
-
+import TagSelect from './components/TagSelect'
 
 class Routes extends Component {
   componentDidMount() {
@@ -31,7 +29,7 @@ class Routes extends Component {
               {/* Routes placed here are only available after logging in */}
               <Route
                 exact
-                path="/user/:id/suggestedmatches"
+                path="/suggestedmatches"
                 component={SuggestedMatches}
               />
               <Route exact path="/user" component={User} />
@@ -41,7 +39,7 @@ class Routes extends Component {
               <Route path="/chat/:id" component={Chat} />
               <Route exact path="/quiz" component={Quiz} />
               <Route exact path="/profile" component={UserProfile} />
-              <Route path="/undecided" component={Undecided} />
+              <Route path="/tagselect" component={TagSelect} />
             </Switch>
           )}
           <Route component={AuthForm} />
