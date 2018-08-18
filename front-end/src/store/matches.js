@@ -8,7 +8,7 @@ const getMatches = matches => ({ type: GET_MATCHES, matches }),
 
 export const fetchMatches = id => async dispatch => {
   try {
-    const { data } = await axios.get(`http://localhost:8080/api/matches`)
+    const { data } = await axios.get(`/api/matches`)
     dispatch(getMatches(data))
   } catch (e) {
     console.error(e)
@@ -17,7 +17,7 @@ export const fetchMatches = id => async dispatch => {
 
 export const matchWith = id => async dispatch => {
   try {
-    const { data } = await axios.post(`http://localhost:8080/api/matches/${id}`)
+    const { data } = await axios.post(`/api/matches/${id}`)
     if (data !== 'OK') {
       dispatch(addMatch(data))
     }

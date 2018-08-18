@@ -12,9 +12,7 @@ const getSuggestedMatches = suggestedMatches => {
 export const fetchSuggestedMatches = id => {
   return async dispatch => {
     try {
-      const response = await axios.get(
-        `http://localhost:8080/api/user/${id}/suggestedmatches`
-      )
+      const response = await axios.get(`/api/user/${id}/suggestedmatches`)
 
       const suggestedMatches = response.data
       if (suggestedMatches === 'FORBIDDEN') {

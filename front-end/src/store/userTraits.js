@@ -9,7 +9,7 @@ const getTraitValues = userTraits => ({
 
 export const setTraitValues = userTraitValues => async dispatch => {
   try {
-    const { data } = await axios.post('http://localhost:8080/api/user/traits', {
+    const { data } = await axios.post('/api/user/traits', {
       userTraitValues
     })
     dispatch(getTraitValues(data))
