@@ -20,7 +20,8 @@ class SuggestedMatches extends Component {
   }
 
   filterSuggestedMatches = (matches, user) => {
-    if (user.activityId) {
+    console.log('user is ' + user)
+    if (user.activity) {
       const yourActivityTagIds = user.activity.tags.map(tag => tag.id)
       return matches.filter(
         match =>
@@ -52,7 +53,7 @@ class SuggestedMatches extends Component {
       onLove,
       match,
       loadMatches,
-      matchWithUser,
+      matchWithUser
     } = this.props
 
     if (!Array.isArray(suggestedMatches) && !suggestedMatches) {
@@ -104,7 +105,7 @@ const mapState = state => {
   return {
     suggestedMatches: state.suggestedMatches,
     currentUser: state.user,
-    tags: state.tags,
+    tags: state.tags
   }
 }
 
@@ -121,7 +122,7 @@ const mapDispatch = (dispatch, ownProps) => ({
   },
   onLove(userId, currentUserId) {
     // dispatch(addMatches(userId, currentUserId))
-  },
+  }
 })
 
 export default connect(

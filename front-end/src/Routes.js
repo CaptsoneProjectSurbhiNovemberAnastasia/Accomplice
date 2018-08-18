@@ -14,7 +14,6 @@ import UserProfile from './components/UserProfile'
 import Quiz from './components/Quiz'
 import Undecided from './components/Undecided'
 
-
 class Routes extends Component {
   componentDidMount() {
     this.props.loadInitialData(this.props.user.id)
@@ -54,10 +53,10 @@ class Routes extends Component {
 const mapDispatch = dispatch => {
   return {
     loadInitialData(id) {
-      dispatch(me())
+      // dispatch(me())
       dispatch(fetchMatches(id))
       dispatch(fetchTags())
-    },
+    }
   }
 }
 
