@@ -57,7 +57,7 @@ class InputQuestion extends Component {
           </div>
           <div className="group row ml-5">
             <label htmlFor="question col-6">
-              <div> Tag your activity so others can find you! :)</div>
+              <div> Tag your activity so others can find you!</div>
             </label>
             <Select
               className="col-5"
