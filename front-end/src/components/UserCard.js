@@ -8,6 +8,7 @@ class UserCard extends Component {
     this.props.matchWithUser(+this.props.user.id)
   }
   render() {
+    console.log('Inside userCard')
     const { user } = this.props
     let activityTags = []
     if (user.activityId) {
@@ -50,7 +51,7 @@ class UserCard extends Component {
 }
 
 const mapDispatch = dispatch => ({
-  matchWithUser: id => dispatch(matchWith(id)),
+  matchWithUser: id => dispatch(matchWith(id))
 })
 export default connect(
   null,
