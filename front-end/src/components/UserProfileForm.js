@@ -60,7 +60,7 @@ const UserProfileForm = props => {
           </div>
           <div className="form-button row btnInline ">
             <button className="btnWidth" type="submit">
-              Update Profile
+              Save Changes
             </button>
             <button className="btnWidth" type="button" onClick={handleClick}>
               Logout

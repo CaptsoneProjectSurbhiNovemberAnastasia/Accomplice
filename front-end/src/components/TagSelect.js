@@ -10,13 +10,10 @@ class Undecided extends Component {
 
   handleChange = selectedOptions => {
     this.setState({ selectedOptions })
+    this.props.chooseTags(selectedOptions)
   }
-  handleSubmit = evt => {
-    evt.preventDefault()
-    this.props.chooseTags(this.state.selectedOptions)
-  }
+
   componentDidMount() {
-    console.log(this.props.tags)
     this.setState({
       selectedOptions: this.props.tags
         .filter(tag => tag.selected)
@@ -32,25 +29,23 @@ class Undecided extends Component {
   })
 
   render() {
-    const { tags } = this.props
+    const { tags, text } = this.props
     let { selectedOptions } = this.state
     let options
 
     if (tags) {
       options = tags.map(tag => this.mapTagToSelectElement(tag))
     }
-    console.log(selectedOptions)
     return (
       <div>
-        <div>What kind of things are you interested in?</div>
-        <form onSubmit={this.handleSubmit}>
+        <div>{text}</div>
+        <form>
           <Select
             value={selectedOptions}
             onChange={this.handleChange}
             options={options}
             isMulti
           />
-          <button type="submit">Go</button>
         </form>
       </div>
     )

@@ -2,11 +2,15 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { logout } from '../store'
 import { updateUser } from '../store/user'
+import { NavLink } from 'react-router-dom'
 import UserProfileForm from './UserProfileForm'
+import Options from './Options'
 
 class UserProfile extends Component {
+  state = { editing: false, options: false }
   render() {
     const { user } = this.props
+    const { editing, options } = this.state
 
     if (user && !user.id) {
       return null
@@ -19,11 +23,19 @@ class UserProfile extends Component {
             <h2>Hi {user.firstName}</h2>
           </div>
           <div className="">
-            <UserProfileForm
-              user={user}
-              handleSubmit={this.props.handleSubmit}
-              handleClick={this.props.handleClick}
-            />
+            <button onClick={() => this.setState({ editing: !editing })}>
+              {editing ? 'Done' : 'Edit Profile'}{' '}
+            </button>
+            {editing ? (
+              <UserProfileForm
+                user={user}
+                handleSubmit={this.props.handleSubmit}
+                handleClick={this.props.handleClick}
+              />
+            ) : (
+              <div />
+            )}
+            <Options />
           </div>
         </div>
       </div>
@@ -33,7 +45,7 @@ class UserProfile extends Component {
 
 const mapState = state => {
   return {
-    user: state.user
+    user: state.user,
   }
 }
 
@@ -59,10 +71,10 @@ const mapDispatch = dispatch => {
           lastName,
           imageUrl,
           age,
-          description
+          description,
         })
       )
-    }
+    },
   }
 }
 
