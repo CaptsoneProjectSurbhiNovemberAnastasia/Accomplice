@@ -12,13 +12,13 @@ class UserProfile extends Component {
       return null
     }
     return (
-      <div className="form-row">
-        <div className="form-row profile_box mx-auto ">
-          <div className="card-img-top ">
+      <div className="form nopadding">
+        <div className="form">
+          <div className=" ">
             <img src={user.imageUrl} alt="" />
             <h2>Hi {user.firstName}</h2>
           </div>
-          <div className="ml-5">
+          <div className="">
             <UserProfileForm
               user={user}
               handleSubmit={this.props.handleSubmit}
