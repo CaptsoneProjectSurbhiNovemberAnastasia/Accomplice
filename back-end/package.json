@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 0",
     "seed": "node seed/seed.js",
-    "algorithm": "node matching-algorithm/main.js"
+    "algorithm": "node matching-algorithm/main.js",
+    "start": "node index.js"
   },
   "author": "",
   "license": "ISC",

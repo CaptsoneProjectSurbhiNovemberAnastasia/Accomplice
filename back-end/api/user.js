@@ -5,8 +5,11 @@ module.exports = router
 
 router.use(async (req, res, next) => {
   try {
+    console.log('userId is', req.user.id)
     const you = await User.findById(req.user.id)
+    //console.log('you is', you)
     const yourActivity = await you.getActivity()
+    //console.log('your activity is', yourActivity)
     const yourActivityTags = await yourActivity.getTags()
     yourActivity.dataValues.tags = yourActivityTags
     req.user.activity = yourActivity
@@ -41,7 +44,7 @@ router.get('/:id/suggestedmatches', async (req, res, next) => {
     const ourUserId = Number(req.params.id)
     if (req.user.id === ourUserId) {
       const matches = await SuggestedMatchesPerUser.findAll({
-        where: { userId: ourUserId },
+        where: { userId: ourUserId }
       })
       if (matches) {
         const matchIds = matches.map(a => a.suggestedMatchId)
@@ -51,7 +54,7 @@ router.get('/:id/suggestedmatches', async (req, res, next) => {
         // instead of Op.in we have to use a for loop...
         for (let i = 0; i < matchIds.length; i++) {
           let currentMatchIds = await SuggestedMatchesPerUser.findAll({
-            where: { suggestedMatchId: matchIds[i] },
+            where: { suggestedMatchId: matchIds[i] }
           })
           possibleUserMatchIds = possibleUserMatchIds.concat(currentMatchIds)
         }
@@ -67,7 +70,7 @@ router.get('/:id/suggestedmatches', async (req, res, next) => {
         for (let i = 0; i < possibleUserMatchIds.length; i++) {
           possibleMatches.push(
             await User.findOne({
-              where: { id: possibleUserMatchIds[i].userId },
+              where: { id: possibleUserMatchIds[i].userId }
             })
           )
         }
@@ -82,6 +85,7 @@ router.get('/:id/suggestedmatches', async (req, res, next) => {
         for (let i = 0; i < possibleMatches.length; i++) {
           if (possibleMatches[i].activityId) {
             const theirActivity = await possibleMatches[i].getActivity()
+            //console.log('their activity', theirActivity)
             const theirActivityTags = await theirActivity.getTags()
             // just put the activity and tags on there so we can look at it on the front end
             theirActivity.dataValues.tags = theirActivityTags
@@ -109,7 +113,7 @@ router.post('/traits', async (req, res, next) => {
 
     for (let i = 0; i <= 5; i++) {
       await you.addTrait(traits[i], {
-        through: { value: req.body.userTraitValues[i] },
+        through: { value: req.body.userTraitValues[i] }
       })
     }
 

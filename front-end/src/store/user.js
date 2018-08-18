@@ -22,14 +22,14 @@ const getUser = user => ({
 
 export const me = () => dispatch =>
   axios
-    .get('http://localhost:8080/auth/me')
+    .get('/auth/me')
     .then(res => dispatch(getUser(res.data || defaultUser)))
     .catch(err => console.log(err))
 
 export const auth = (email, password, method) => async dispatch => {
   let res
   try {
-    res = await axios.post(`http://localhost:8080/auth/${method}`, {
+    res = await axios.post(`/auth/${method}`, {
       email,
       password
     })
@@ -63,10 +63,7 @@ export const updateUser = updateInfo => async dispatch => {
   try {
     console.log(updateInfo)
     const id = updateInfo.id
-    const { data } = await axios.put(
-      `http://localhost:8080/api/user/${id}`,
-      updateInfo
-    )
+    const { data } = await axios.put(`/api/user/${id}`, updateInfo)
     dispatch(getUser(data))
   } catch (err) {
     console.log(err)
@@ -75,9 +72,7 @@ export const updateUser = updateInfo => async dispatch => {
 
 export const deleteAccount = userId => dispatch => {
   dispatch(logOutUser())
-  axios
-    .delete(`http://localhost:8080/api/userAccount/${userId}`)
-    .catch(err => console.log(err))
+  axios.delete(`/api/userAccount/${userId}`).catch(err => console.log(err))
 }
 
 // REDUCER
