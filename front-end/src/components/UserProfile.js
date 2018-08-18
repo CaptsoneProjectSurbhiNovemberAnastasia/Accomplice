@@ -22,8 +22,7 @@ class UserProfile extends Component {
             <img src={user.imageUrl} alt="" />
             <h2>Hi {user.firstName}</h2>
           </div>
-<<<<<<< HEAD
-          <div className="ml-5">
+          <div className="">
             <button onClick={() => this.setState({ editing: !editing })}>
               {editing ? 'Done' : 'Edit Profile'}{' '}
             </button>
@@ -37,14 +36,6 @@ class UserProfile extends Component {
               <div />
             )}
             <Options />
-=======
-          <div className="">
-            <UserProfileForm
-              user={user}
-              handleSubmit={this.props.handleSubmit}
-              handleClick={this.props.handleClick}
-            />
->>>>>>> master
           </div>
         </div>
       </div>
