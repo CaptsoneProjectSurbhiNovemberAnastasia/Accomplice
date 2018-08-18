@@ -7,7 +7,7 @@ const getTags = tags => ({ type: GET_TAGS, tags }),
 
 export const fetchTags = () => async dispatch => {
   try {
-    const { data } = await axios.get(`/api/tags`)
+    const { data } = await axios.get(`http://localhost:8080/api/tags`)
     dispatch(getTags(data))
   } catch (err) {
     console.error(err)
@@ -16,7 +16,7 @@ export const fetchTags = () => async dispatch => {
 
 export const setTags = tags => async dispatch => {
   try {
-    const { data } = await axios.post(`/api/tags`, tags)
+    const { data } = await axios.post(`http://localhost:8080/api/tags`, tags)
 
     const selectedTagIds = data.map(tag => tag.id)
     dispatch(updateTags(selectedTagIds))

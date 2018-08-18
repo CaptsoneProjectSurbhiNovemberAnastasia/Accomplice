@@ -6,7 +6,7 @@ const getActivity = activity => ({ type: GET_ACTIVITY, activity })
 
 export const fetchActivity = () => async dispatch => {
   try {
-    const { data } = await axios.get('/api/activity')
+    const { data } = await axios.get('http://localhost:8080/api/activity')
     dispatch(getActivity(data))
   } catch (e) {
     console.error(e)
@@ -15,7 +15,7 @@ export const fetchActivity = () => async dispatch => {
 
 export const setActivity = (name, tags) => async dispatch => {
   try {
-    const { data } = await axios.post('/api/activity', {
+    const { data } = await axios.post('http://localhost:8080//api/activity', {
       name,
       tags
     })
