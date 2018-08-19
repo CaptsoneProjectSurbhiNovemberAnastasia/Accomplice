@@ -7,7 +7,8 @@ class Activity extends Component {
   state = { activity: '' }
 
   componentDidMount() {
-    this.setState({ activity: this.props.activity.name })
+    if (this.props.activity)
+      this.setState({ activity: this.props.activity.name })
   }
 
   handleChange = evt => {
@@ -54,7 +55,7 @@ class Activity extends Component {
     )
   }
 }
-
+const mapState = state => ({ activity: state.activity })
 const mapDispatch = dispatch => ({
   chooseActivity: activity => {
     dispatch(setActivity(activity))
@@ -65,6 +66,6 @@ const mapDispatch = dispatch => ({
 })
 
 export default connect(
-  null,
+  mapState,
   mapDispatch
 )(Activity)
