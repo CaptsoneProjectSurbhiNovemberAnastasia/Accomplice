@@ -21,7 +21,7 @@ class UserProfile extends Component {
             <img src={user.imageUrl} alt="" />
             <h2>Hi {user.firstName}</h2>
           </div>
-          <div className="">
+          <div>
             <button onClick={() => this.setState({ editing: !editing })}>
               {editing ? 'Done' : 'Edit Profile'}{' '}
             </button>
@@ -32,7 +32,7 @@ class UserProfile extends Component {
                 handleClick={this.props.handleClick}
               />
             ) : (
-              <div />
+              <div className="mb-2" />
             )}
             <NavLink to="/options">Options</NavLink>
           </div>
@@ -44,7 +44,7 @@ class UserProfile extends Component {
 
 const mapState = state => {
   return {
-    user: state.user,
+    user: state.user
   }
 }
 
@@ -70,10 +70,10 @@ const mapDispatch = dispatch => {
           lastName,
           imageUrl,
           age,
-          description,
+          description
         })
       )
-    },
+    }
   }
 }
 

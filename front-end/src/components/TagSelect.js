@@ -36,14 +36,17 @@ class TagSelect extends Component {
       options = tags.map(tag => this.mapTagToSelectElement(tag))
     }
     return (
-      <div>
-        <div>{text}</div>
-        <Select
-          value={selectedOptions}
-          onChange={this.handleChange}
-          options={options}
-          isMulti
-        />
+      <div className="group row">
+        <div htmlFor="question col-6">{text}</div>
+        <div className="inlineBtn">
+          <Select
+            className="mb-2 mt-2"
+            value={selectedOptions}
+            onChange={this.handleChange}
+            options={options}
+            isMulti
+          />
+        </div>
       </div>
     )
   }

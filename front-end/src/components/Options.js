@@ -14,6 +14,7 @@ class Options extends Component {
       <div>
         <NavLink to="/profile">Back</NavLink>
         <TagSelect
+          className="mb-2"
           text="You are seeing users doing things tagged with:"
           tagMethod={this.props.chooseTags}
           activity={false}
@@ -34,7 +35,9 @@ class Options extends Component {
             </button>
           </div>
         )}
-        <NavLink to="/quiz">Retake Personality Quiz</NavLink>
+        <NavLink to="/quiz" className="pt-2">
+          Retake Personality Quiz
+        </NavLink>
       </div>
     )
   }

@@ -31,7 +31,7 @@ class UserCard extends Component {
           <div id="picContainer">
             <img className="userPic rounded" src={user.imageUrl} alt="" />
           </div>
-          <li>
+          <li className="text-justify-center">
             <h4>{user.firstName + ' ' + user.lastName}</h4>
             <p>{user.description}</p>
             <p>
