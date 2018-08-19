@@ -60,8 +60,10 @@ class InputQuestion extends Component {
             <label htmlFor="question col-6">
               <div> Tag your activity so others can find you!</div>
             </label>
+          </div>
+          <div className=" group row">
             <Select
-              className="col-8"
+              className="col-4"
               value={this.selectedOptions}
               onChange={this.handleChange}
               options={options}
