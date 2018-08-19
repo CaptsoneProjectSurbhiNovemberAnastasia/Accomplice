@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setTags } from '../store'
 import Select from 'react-select'
 
 class TagSelect extends Component {

@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Select from 'react-select'
 import { setActivity, setActivityTags } from '../store'
 import TagSelect from './TagSelect'
 
 class Activity extends Component {
   state = { activity: '' }
+
+  componentDidMount() {
+    this.setState({ activity: this.props.activity.name })
+  }
 
   handleChange = evt => {
     this.setState({
@@ -16,30 +19,34 @@ class Activity extends Component {
   handleSubmit = evt => {
     evt.preventDefault()
     this.props.chooseActivity(this.state.activity)
+    this.props.onClick()
   }
 
   render() {
-    const { tags } = this.props
+    const { editing } = this.props
 
     return (
       <div>
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="activity col-6">
-            <div>What would you like to do today?</div>
+            <div>
+              {editing ? 'Your Activity: ' : 'What are you going to do today?'}
+            </div>
           </label>
           <input
             name="activity"
             type="text"
             placeholder="e.g. Go on a hike"
+            value={this.state.activity}
             onChange={this.handleChange}
           />
 
           <button type="submit" className="goBtn">
-            GO
+            {editing ? 'Set' : 'Go!'}
           </button>
         </form>
         <TagSelect
-          text="Describe your activity:"
+          text="Tag your activity:"
           tagMethod={this.props.chooseActivityTags}
           activity={true}
         />
@@ -48,10 +55,6 @@ class Activity extends Component {
   }
 }
 
-const mapState = state => ({
-  tags: state.tags,
-  activity: state.activity,
-})
 const mapDispatch = dispatch => ({
   chooseActivity: activity => {
     dispatch(setActivity(activity))
@@ -62,6 +65,6 @@ const mapDispatch = dispatch => ({
 })
 
 export default connect(
-  mapState,
+  null,
   mapDispatch
 )(Activity)

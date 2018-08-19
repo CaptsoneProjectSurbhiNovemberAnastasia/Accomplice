@@ -4,13 +4,12 @@ import { logout } from '../store'
 import { updateUser } from '../store/user'
 import { NavLink } from 'react-router-dom'
 import UserProfileForm from './UserProfileForm'
-import Options from './Options'
 
 class UserProfile extends Component {
   state = { editing: false, options: false }
   render() {
     const { user } = this.props
-    const { editing, options } = this.state
+    const { editing } = this.state
 
     if (user && !user.id) {
       return null
@@ -35,7 +34,7 @@ class UserProfile extends Component {
             ) : (
               <div />
             )}
-            <Options />
+            <NavLink to="/options">Options</NavLink>
           </div>
         </div>
       </div>

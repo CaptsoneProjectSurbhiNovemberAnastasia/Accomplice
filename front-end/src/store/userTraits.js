@@ -1,4 +1,5 @@
 import axios from 'axios'
+import history from '../history'
 
 const GET_USER_TRAITS = 'GET_USER_TRAITS'
 
@@ -13,6 +14,7 @@ export const setTraitValues = userTraitValues => async dispatch => {
       userTraitValues,
     })
     dispatch(getTraitValues(data))
+    history.push('/options')
   } catch (err) {
     console.error(err)
   }

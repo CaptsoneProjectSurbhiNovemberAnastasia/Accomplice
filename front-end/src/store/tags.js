@@ -47,6 +47,9 @@ const tags = (state = [], action) => {
         if (tag.selected === undefined) {
           tag.selected = false
         }
+        if (tag.activity === undefined) {
+          tag.activity = false
+        }
         return tag
       })
     }
