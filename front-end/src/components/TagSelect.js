@@ -5,22 +5,19 @@ import Select from 'react-select'
 
 class Undecided extends Component {
   state = {
-    selectedOptions: [],
+    selectedOptions: []
   }
 
   handleChange = selectedOptions => {
     this.setState({ selectedOptions })
+    this.props.chooseTags(selectedOptions)
   }
-  handleSubmit = evt => {
-    evt.preventDefault()
-    this.props.chooseTags(this.state.selectedOptions)
-  }
+
   componentDidMount() {
-    console.log(this.props.tags)
     this.setState({
       selectedOptions: this.props.tags
         .filter(tag => tag.selected)
-        .map(tag => this.mapTagToSelectElement(tag)),
+        .map(tag => this.mapTagToSelectElement(tag))
     })
   }
 
@@ -28,29 +25,28 @@ class Undecided extends Component {
     value: tag.name.toLowerCase(),
     label: tag.name,
     id: tag.id,
-    key: tag.id,
+    key: tag.id
   })
 
   render() {
-    const { tags } = this.props
+    const { tags, text } = this.props
     let { selectedOptions } = this.state
     let options
 
     if (tags) {
       options = tags.map(tag => this.mapTagToSelectElement(tag))
     }
-    console.log(selectedOptions)
     return (
       <div>
-        <div>What kind of things are you interested in?</div>
-        <form onSubmit={this.handleSubmit}>
+        <div>{text}</div>
+        <form>
           <Select
+            className="mb-2 mt-2"
             value={selectedOptions}
             onChange={this.handleChange}
             options={options}
             isMulti
           />
-          <button type="submit">Go</button>
         </form>
       </div>
     )
@@ -58,10 +54,10 @@ class Undecided extends Component {
 }
 
 const mapDispatch = dispatch => ({
-  chooseTags: tags => dispatch(setTags(tags)),
+  chooseTags: tags => dispatch(setTags(tags))
 })
 const mapState = state => ({
-  tags: state.tags,
+  tags: state.tags
 })
 export default connect(
   mapState,

@@ -3,9 +3,9 @@ import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { NavLink } from 'react-router-dom'
 import { setActivity } from '../store'
-import Select from 'react-select'
 import { Input } from 'react-input-component'
 import CurrentLocation from './currentLocation'
+import Activity from './Activity'
 
 class InputQuestion extends Component {
   state = {
@@ -44,36 +44,12 @@ class InputQuestion extends Component {
     }
     return (
       <div id="questionForm">
-        <form onSubmit={this.handleSubmit}>
-          <div className="group row ">
-            <label htmlFor="activity col-6">
-              <div>What would you like to do today?</div>
-            </label>
-            <input
-              name="activity"
-              type="text"
-              placeholder="e.g. Go on a hike"
-              onChange={this.handleChange}
-            />
-          </div>
-          <div className="group row">
-            <label htmlFor="question col-6">
-              <div> Tag your activity so others can find you!</div>
-            </label>
-          </div>
-          <div className=" group row">
-            <Select
-              className="col-4"
-              value={this.selectedOptions}
-              onChange={this.handleChange}
-              options={options}
-              isMulti
-            />
-            <button type="submit" className="goBtn">
-              GO
-            </button>
-          </div>
-        </form>
+        <Activity
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          options={options}
+          selectedOptions={this.state.selectedOptions}
+        />
         <div className="group row">
           <NavLink to={`/user/${user.id}/suggestedmatches`}>
             See people to match with!

@@ -1,11 +1,8 @@
 import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
-import { connect } from 'react-redux'
 
 class Navbar extends Component {
   render() {
-    const { user } = this.props
-
     return (
       <nav className="navbar navbar-dark navbar-expand-md bg-success bg-color justify-content-between">
         <div className="container-fluid flexwrap">
@@ -19,7 +16,7 @@ class Navbar extends Component {
             </ul>
           </div>
           <NavLink
-            to={`/user/${user.id}/suggestedmatches`}
+            to="/suggestedmatches"
             className="navbar-brand mx-auto d-block text-center order-1 "
           >
             Accomplice
@@ -39,5 +36,4 @@ class Navbar extends Component {
   }
 }
 
-const mapState = state => ({ user: state.user })
-export default connect(mapState)(Navbar)
+export default Navbar
