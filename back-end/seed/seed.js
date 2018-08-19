@@ -28,7 +28,7 @@ async function traitSeed() {
       Trait.create({ name: 'EmotionalStability' }),
       Trait.create({ name: 'Agreeableness' }),
       Trait.create({ name: 'Conscientiousness' }),
-      Trait.create({ name: 'Intellect / Imagination' }),
+      Trait.create({ name: 'Intellect / Imagination' })
     ])
 
     console.log(`seeded ${traits.length} traits`)
@@ -44,7 +44,7 @@ async function tagSeed() {
       Tag.create({ name: 'Indoor' }),
       Tag.create({ name: 'Artistic' }),
       Tag.create({ name: 'Outdoor' }),
-      Tag.create({ name: 'Relaxing' }),
+      Tag.create({ name: 'Relaxing' })
     ])
 
     console.log(`seeded ${tags.length} tags`)
@@ -61,7 +61,7 @@ async function activitySeed() {
       Activity.create({ name: 'go to the MoMA' }),
       Activity.create({ name: 'go to the beach' }),
       Activity.create({ name: 'go to the park' }),
-      Activity.create({ name: "see 'Sorry to Bother You'" }),
+      Activity.create({ name: "see 'Sorry to Bother You'" })
     ])
     const tags = await Tag.findAll()
 
@@ -94,7 +94,7 @@ async function questionSeed() {
       "I often recognize people's emotions around me.",
       'I have a rich vocabulary.',
       'I am interested in abstract ideas.',
-      'I have a lot of creative ideas.',
+      'I have a lot of creative ideas.'
     ]
     for (var i = 0; i < questions.length; i++) {
       let currentQuestion = await Question.create({ question: questions[i] })
@@ -117,7 +117,7 @@ async function userSeed() {
       randomNumberForImage % 2 ? (gender = 'men') : (gender = 'women')
 
       userData[i].imageUrl =
-        'https://randomuser.me/api/portraits/' +
+        'https://s3.us-east-2.amazonaws.com/accomplice1/' +
         gender +
         '/' +
         randomNumberForImage +
@@ -127,7 +127,7 @@ async function userSeed() {
 
       for (let j = 0; j < traits.length; j++) {
         await currentUser.addTrait(traits[j], {
-          through: { value: Math.floor(Math.random() * 100) },
+          through: { value: Math.floor(Math.random() * 100) }
         })
       }
 
