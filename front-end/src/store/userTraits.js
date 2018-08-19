@@ -1,22 +1,24 @@
 import axios from 'axios'
+import history from '../history'
 
 const GET_USER_TRAITS = 'GET_USER_TRAITS'
 
 const getTraitValues = userTraits => ({
   type: GET_USER_TRAITS,
-  userTraits
+  userTraits,
 })
 
-export const setTraitValues = (userTraitValues) => async dispatch => {
+export const setTraitValues = userTraitValues => async dispatch => {
   try {
-
-    const { data } = await axios.post('http://localhost:8080/api/user/traits', {userTraitValues})
+    const { data } = await axios.post('http://localhost:8080/api/user/traits', {
+      userTraitValues,
+    })
     dispatch(getTraitValues(data))
+    history.push('/options')
   } catch (err) {
     console.error(err)
   }
 }
-
 
 let initialState = []
 const userTraits = (state = initialState, action) => {

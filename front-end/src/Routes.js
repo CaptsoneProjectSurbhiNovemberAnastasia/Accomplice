@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter, Route, Switch } from 'react-router-dom'
-import User from './components/user'
-import MatchedUsers from './components/matchedUsers'
 import AuthForm from './components/auth-form'
 import SuggestedMatches from './components/suggestedMatches'
 import InputQuestion from './components/inputQuestion'
 import AllMatches from './components/AllMatches'
 import Chat from './components/Chat'
-import { me, fetchMatches, fetchTags } from './store'
+import { me, fetchMatches, fetchTags, fetchActivity } from './store'
 import UserProfile from './components/UserProfile'
 import Quiz from './components/Quiz'
 import TagSelect from './components/TagSelect'
+import Options from './components/Options'
 
 class Routes extends Component {
   componentDidMount() {
@@ -32,14 +31,13 @@ class Routes extends Component {
                 path="/suggestedmatches"
                 component={SuggestedMatches}
               />
-              <Route exact path="/user" component={User} />
-              <Route path="/matchedUsers" component={MatchedUsers} />
               <Route exact path="/question" component={InputQuestion} />
               <Route exact path="/matches" component={AllMatches} />
               <Route path="/chat/:id" component={Chat} />
               <Route exact path="/quiz" component={Quiz} />
               <Route exact path="/profile" component={UserProfile} />
               <Route path="/tagselect" component={TagSelect} />
+              <Route path="/options" component={Options} />
             </Switch>
           )}
           <Route component={AuthForm} />
@@ -55,6 +53,7 @@ const mapDispatch = dispatch => {
       dispatch(me())
       dispatch(fetchMatches(id))
       dispatch(fetchTags())
+      dispatch(fetchActivity())
     },
   }
 }

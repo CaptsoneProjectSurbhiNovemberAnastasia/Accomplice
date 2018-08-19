@@ -1,42 +1,71 @@
 import React, { Component } from 'react'
-import Select from 'react-select'
+import { connect } from 'react-redux'
+import { setActivity, setActivityTags } from '../store'
+import TagSelect from './TagSelect'
 
 class Activity extends Component {
+  state = { activity: '' }
+
+  componentDidMount() {
+    if (this.props.activity)
+      this.setState({ activity: this.props.activity.name })
+  }
+
+  handleChange = evt => {
+    this.setState({
+      [evt.target.name]: evt.target.value,
+    })
+  }
+
+  handleSubmit = evt => {
+    evt.preventDefault()
+    this.props.chooseActivity(this.state.activity)
+    this.props.onClick()
+  }
+
   render() {
-    const { handleSubmit, handleChange, options, selectedOptions } = this.props
+    const { editing } = this.props
+
     return (
-      <form onSubmit={handleSubmit}>
-        <div className="group row ">
+      <div>
+        <form onSubmit={this.handleSubmit}>
           <label htmlFor="activity col-6">
-            <div>What would you like to do today?</div>
+            <div>
+              {editing ? 'Your Activity: ' : 'What are you going to do today?'}
+            </div>
           </label>
           <input
             name="activity"
             type="text"
-            placeholder="  e.g. Go on a hike"
-            onChange={handleChange}
+            placeholder="e.g. Go on a hike"
+            value={this.state.activity}
+            onChange={this.handleChange}
           />
-        </div>
-        <div className="group row">
-          <label htmlFor="question col-6">
-            <div> Tag your activity so others can find you!</div>
-          </label>
-        </div>
-        <div className="inlineBtn">
-          <Select
-            className="selectActivity"
-            value={selectedOptions}
-            onChange={handleChange}
-            options={options}
-            isMulti
-          />
+
           <button type="submit" className="goBtn">
-            GO
+            {editing ? 'Set' : 'Go!'}
           </button>
-        </div>
-      </form>
+        </form>
+        <TagSelect
+          text="Tag your activity:"
+          tagMethod={this.props.chooseActivityTags}
+          activity={true}
+        />
+      </div>
     )
   }
 }
+const mapState = state => ({ activity: state.activity })
+const mapDispatch = dispatch => ({
+  chooseActivity: activity => {
+    dispatch(setActivity(activity))
+  },
+  chooseActivityTags: tags => {
+    dispatch(setActivityTags(tags))
+  },
+})
 
-export default Activity
+export default connect(
+  mapState,
+  mapDispatch
+)(Activity)

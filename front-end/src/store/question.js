@@ -2,10 +2,9 @@ import axios from 'axios'
 
 export const GET_QUESTIONS = 'GET_QUESTIONS'
 
-
 const getQuestions = questions => ({
   type: GET_QUESTIONS,
-  questions
+  questions,
 })
 
 export const fetchQuestions = () => async dispatch => {

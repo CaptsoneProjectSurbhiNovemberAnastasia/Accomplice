@@ -1,31 +1,30 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { setTags } from '../store'
 import Select from 'react-select'
 
-class Undecided extends Component {
+class TagSelect extends Component {
   state = {
-    selectedOptions: []
-  }
-
-  handleChange = selectedOptions => {
-    this.setState({ selectedOptions })
-    this.props.chooseTags(selectedOptions)
+    selectedOptions: [],
   }
 
   componentDidMount() {
     this.setState({
       selectedOptions: this.props.tags
-        .filter(tag => tag.selected)
-        .map(tag => this.mapTagToSelectElement(tag))
+        .filter(tag => (this.props.activity ? tag.activity : tag.selected))
+        .map(tag => this.mapTagToSelectElement(tag)),
     })
+  }
+
+  handleChange = selectedOptions => {
+    this.setState({ selectedOptions })
+    this.props.tagMethod(selectedOptions)
   }
 
   mapTagToSelectElement = tag => ({
     value: tag.name.toLowerCase(),
     label: tag.name,
     id: tag.id,
-    key: tag.id
+    key: tag.id,
   })
 
   render() {
@@ -37,9 +36,9 @@ class Undecided extends Component {
       options = tags.map(tag => this.mapTagToSelectElement(tag))
     }
     return (
-      <div>
-        <div>{text}</div>
-        <form>
+      <div className="group row">
+        <div htmlFor="question col-6">{text}</div>
+        <div className="inlineBtn">
           <Select
             className="mb-2 mt-2"
             value={selectedOptions}
@@ -47,19 +46,13 @@ class Undecided extends Component {
             options={options}
             isMulti
           />
-        </form>
+        </div>
       </div>
     )
   }
 }
 
-const mapDispatch = dispatch => ({
-  chooseTags: tags => dispatch(setTags(tags))
-})
 const mapState = state => ({
-  tags: state.tags
+  tags: state.tags,
 })
-export default connect(
-  mapState,
-  mapDispatch
-)(Undecided)
+export default connect(mapState)(TagSelect)

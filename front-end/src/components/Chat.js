@@ -19,17 +19,17 @@ class Chat extends Component {
       const me = new Talk.User({
         id: loggedInUser.id,
         name: loggedInUser.firstName + ' ' + loggedInUser.lastName,
-        photoUrl: loggedInUser.imageUrl
+        photoUrl: loggedInUser.imageUrl,
       })
       this.talkSession = new Talk.Session({
         appId: 'tcvhLpn3',
-        me: me
+        me: me,
       })
 
       const other = new Talk.User({
         id: chatPartner.id,
         name: chatPartner.firstName + ' ' + chatPartner.lastName,
-        photoUrl: chatPartner.imageUrl
+        photoUrl: chatPartner.imageUrl,
       })
 
       const conversationId = Talk.oneOnOneId(me, other)
@@ -41,7 +41,7 @@ class Chat extends Component {
       conversation.setParticipant(other)
 
       const inbox = this.talkSession.createInbox({
-        selected: conversation
+        selected: conversation,
       })
       inbox.mount(this.container)
     } catch (e) {
@@ -61,7 +61,7 @@ class Chat extends Component {
 
 const mapState = state => ({
   loggedInUser: state.user,
-  matches: state.matches
+  matches: state.matches,
 })
 
 export default connect(
