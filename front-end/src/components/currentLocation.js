@@ -7,7 +7,7 @@ class CurrentLocation extends Component {
     super(props)
     this.state = {
       latLng: [],
-      geolocationOn: false
+      geolocationOn: false,
     }
     // Bindings
     this.getLocation = this.getLocation.bind(this)
@@ -34,7 +34,7 @@ class CurrentLocation extends Component {
     var latitude = position.coords.latitude
     var longitude = position.coords.longitude
     this.setState({
-      latLng: [latitude, longitude]
+      latLng: [latitude, longitude],
     })
     this.onLocation(this.state.latLng[0], this.state.latLng[1])
   }
@@ -77,7 +77,7 @@ class CurrentLocation extends Component {
 
 const mapState = state => ({
   currentLocation: state.currentLocation,
-  user: state.user
+  user: state.user,
 })
 
 const mapDispatch = dispatch => ({
@@ -86,7 +86,7 @@ const mapDispatch = dispatch => ({
   },
   updateLocation(latitude, longitude, id) {
     dispatch(updateUser({ latitude, longitude, id }))
-  }
+  },
 })
 
 export default connect(

@@ -12,10 +12,10 @@ const defaultUser = {}
 // ACTION CREATORS
 const getUser = user => ({
     type: GET_USER,
-    user
+    user,
   }),
   logOutUser = () => ({
-    type: LOGOUT_USER
+    type: LOGOUT_USER,
   })
 
 // THUNK CREATORS
@@ -31,7 +31,7 @@ export const auth = (email, password, method) => async dispatch => {
   try {
     res = await axios.post(`http://localhost:8080/auth/${method}`, {
       email,
-      password
+      password,
     })
   } catch (authError) {
     return dispatch(getUser({ error: authError }))

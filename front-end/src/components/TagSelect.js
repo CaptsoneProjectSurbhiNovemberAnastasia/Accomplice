@@ -3,22 +3,22 @@ import { connect } from 'react-redux'
 import { setTags } from '../store'
 import Select from 'react-select'
 
-class Undecided extends Component {
+class TagSelect extends Component {
   state = {
     selectedOptions: [],
-  }
-
-  handleChange = selectedOptions => {
-    this.setState({ selectedOptions })
-    this.props.chooseTags(selectedOptions)
   }
 
   componentDidMount() {
     this.setState({
       selectedOptions: this.props.tags
-        .filter(tag => tag.selected)
+        .filter(tag => (this.props.activity ? tag.activity : tag.selected))
         .map(tag => this.mapTagToSelectElement(tag)),
     })
+  }
+
+  handleChange = selectedOptions => {
+    this.setState({ selectedOptions })
+    this.props.tagMethod(selectedOptions)
   }
 
   mapTagToSelectElement = tag => ({
@@ -39,26 +39,18 @@ class Undecided extends Component {
     return (
       <div>
         <div>{text}</div>
-        <form>
-          <Select
-            value={selectedOptions}
-            onChange={this.handleChange}
-            options={options}
-            isMulti
-          />
-        </form>
+        <Select
+          value={selectedOptions}
+          onChange={this.handleChange}
+          options={options}
+          isMulti
+        />
       </div>
     )
   }
 }
 
-const mapDispatch = dispatch => ({
-  chooseTags: tags => dispatch(setTags(tags)),
-})
 const mapState = state => ({
   tags: state.tags,
 })
-export default connect(
-  mapState,
-  mapDispatch
-)(Undecided)
+export default connect(mapState)(TagSelect)

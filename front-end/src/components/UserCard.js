@@ -5,7 +5,7 @@ import { matchWith } from '../store'
 class UserCard extends Component {
   handleClick = evt => {
     evt.preventDefault()
-    this.props.matchWithUser(+this.props.user.id)
+    this.props.matchWithUser(this.props.user.id)
   }
   render() {
     console.log('Inside userCard')
@@ -51,7 +51,7 @@ class UserCard extends Component {
 }
 
 const mapDispatch = dispatch => ({
-  matchWithUser: id => dispatch(matchWith(id))
+  matchWithUser: id => dispatch(matchWith(id)),
 })
 export default connect(
   null,

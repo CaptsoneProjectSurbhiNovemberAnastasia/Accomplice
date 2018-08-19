@@ -1,12 +1,29 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import Select from 'react-select'
+import { setActivity, setActivityTags } from '../store'
+import TagSelect from './TagSelect'
 
 class Activity extends Component {
+  state = { activity: '' }
+
+  handleChange = evt => {
+    this.setState({
+      [evt.target.name]: evt.target.value,
+    })
+  }
+
+  handleSubmit = evt => {
+    evt.preventDefault()
+    this.props.chooseActivity(this.state.activity)
+  }
+
   render() {
-    const { handleSubmit, handleChange, options, selectedOptions } = this.props
+    const { tags } = this.props
+
     return (
-      <form onSubmit={handleSubmit}>
-        <div className="group row ">
+      <div>
+        <form onSubmit={this.handleSubmit}>
           <label htmlFor="activity col-6">
             <div>What would you like to do today?</div>
           </label>
@@ -14,27 +31,37 @@ class Activity extends Component {
             name="activity"
             type="text"
             placeholder="e.g. Go on a hike"
-            onChange={handleChange}
+            onChange={this.handleChange}
           />
-        </div>
-        <div className="group row">
-          <label htmlFor="question col-6">
-            <div> Tag your activity so others can find you!</div>
-          </label>
-          <Select
-            className="col-8"
-            value={selectedOptions}
-            onChange={handleChange}
-            options={options}
-            isMulti
-          />
+
           <button type="submit" className="goBtn">
             GO
           </button>
-        </div>
-      </form>
+        </form>
+        <TagSelect
+          text="Describe your activity:"
+          tagMethod={this.props.chooseActivityTags}
+          activity={true}
+        />
+      </div>
     )
   }
 }
 
-export default Activity
+const mapState = state => ({
+  tags: state.tags,
+  activity: state.activity,
+})
+const mapDispatch = dispatch => ({
+  chooseActivity: activity => {
+    dispatch(setActivity(activity))
+  },
+  chooseActivityTags: tags => {
+    dispatch(setActivityTags(tags))
+  },
+})
+
+export default connect(
+  mapState,
+  mapDispatch
+)(Activity)

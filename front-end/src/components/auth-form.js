@@ -73,7 +73,6 @@ const AuthForm = props => {
           <div className="sign-up-htm">
             {/*signup form */}
             <form onSubmit={event => handleSubmit(event, type)}>
-
               <div className="group">
                 <label htmlFor="email">
                   <small>Email</small>
