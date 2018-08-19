@@ -5,7 +5,7 @@ import Select from 'react-select'
 
 class Undecided extends Component {
   state = {
-    selectedOptions: [],
+    selectedOptions: []
   }
 
   handleChange = selectedOptions => {
@@ -17,7 +17,7 @@ class Undecided extends Component {
     this.setState({
       selectedOptions: this.props.tags
         .filter(tag => tag.selected)
-        .map(tag => this.mapTagToSelectElement(tag)),
+        .map(tag => this.mapTagToSelectElement(tag))
     })
   }
 
@@ -25,7 +25,7 @@ class Undecided extends Component {
     value: tag.name.toLowerCase(),
     label: tag.name,
     id: tag.id,
-    key: tag.id,
+    key: tag.id
   })
 
   render() {
@@ -41,6 +41,7 @@ class Undecided extends Component {
         <div>{text}</div>
         <form>
           <Select
+            className="mb-2 mt-2"
             value={selectedOptions}
             onChange={this.handleChange}
             options={options}
@@ -53,10 +54,10 @@ class Undecided extends Component {
 }
 
 const mapDispatch = dispatch => ({
-  chooseTags: tags => dispatch(setTags(tags)),
+  chooseTags: tags => dispatch(setTags(tags))
 })
 const mapState = state => ({
-  tags: state.tags,
+  tags: state.tags
 })
 export default connect(
   mapState,

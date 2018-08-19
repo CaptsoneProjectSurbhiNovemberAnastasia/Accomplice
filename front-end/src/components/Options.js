@@ -6,8 +6,13 @@ class Options extends Component {
   render() {
     return (
       <div>
-        <TagSelect text="You are seeing users doing things tagged with:" />
-        <NavLink to="/quiz">Retake Personality Quiz</NavLink>
+        <TagSelect
+          className="mb-2"
+          text="You are seeing users doing things tagged with:"
+        />
+        <NavLink className="pt-2" to="/quiz">
+          Retake Personality Quiz
+        </NavLink>
       </div>
     )
   }

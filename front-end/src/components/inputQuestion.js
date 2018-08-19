@@ -10,7 +10,7 @@ import Activity from './Activity'
 class InputQuestion extends Component {
   state = {
     selectedOptions: [],
-    activity: '',
+    activity: ''
   }
 
   handleSubmit = evt => {
@@ -22,7 +22,7 @@ class InputQuestion extends Component {
     if (selectedOptions.target) {
       // it is an event
       this.setState({
-        [selectedOptions.target.name]: selectedOptions.target.value,
+        [selectedOptions.target.name]: selectedOptions.target.value
       })
     } else {
       // it is the options array from react-select
@@ -39,7 +39,7 @@ class InputQuestion extends Component {
         value: tag.name.toLowerCase(),
         label: tag.name,
         id: tag.id,
-        key: tag.id,
+        key: tag.id
       }))
     }
     return (
@@ -69,12 +69,12 @@ class InputQuestion extends Component {
 
 const mapState = state => ({
   user: state.user,
-  tags: state.tags,
+  tags: state.tags
 })
 const mapDispatch = dispatch => ({
   chooseActivity: (activity, tags) => {
     dispatch(setActivity(activity, tags))
-  },
+  }
 })
 
 export default withRouter(

@@ -13,7 +13,7 @@ class Activity extends Component {
           <input
             name="activity"
             type="text"
-            placeholder="e.g. Go on a hike"
+            placeholder="  e.g. Go on a hike"
             onChange={handleChange}
           />
         </div>
@@ -21,8 +21,10 @@ class Activity extends Component {
           <label htmlFor="question col-6">
             <div> Tag your activity so others can find you!</div>
           </label>
+        </div>
+        <div className="inlineBtn">
           <Select
-            className="col-8"
+            className="selectActivity"
             value={selectedOptions}
             onChange={handleChange}
             options={options}
