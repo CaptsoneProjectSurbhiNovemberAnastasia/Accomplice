@@ -9,13 +9,7 @@ const InputQuestion = props => {
     <div id="questionForm">
       <Activity />
       <div className="group row">
-        <NavLink to="/suggestedmatches">See people to match with!</NavLink>
-      </div>
-
-      <div className="group row">
-        <label htmlFor="question">
-          <NavLink to="/undecided">Don't know... get a clue!</NavLink>
-        </label>
+        <NavLink to="/suggestedmatches">Don't know? Get swiping!</NavLink>
       </div>
       <CurrentLocation />
     </div>
